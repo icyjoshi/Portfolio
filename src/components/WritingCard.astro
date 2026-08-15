@@ -1,0 +1,133 @@
+---
+/**
+ * Writing card — set as a broadsheet index entry rather than a blog
+ * tile. Links out when the piece was published elsewhere.
+ */
+import type { WritingEntry } from '@lib/content';
+import { formatDate } from '@lib/content';
+import { url } from '@lib/url';
+
+interface Props {
+  entry: WritingEntry;
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const external = Boolean(d.externalUrl);
+const href = external ? d.externalUrl! : url(`/writing/${entry.id}`);
+---
+
+<article class="wc" data-reveal data-reveal-group="writing">
+  <div class="wc__meta">
+    <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+    <span class="wc__kind">{d.kind}</span>
+    {d.publication && <span class="wc__pub">{d.publication}</span>}
+  </div>
+
+  <h3 class="wc__title">
+    <a
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+    >
+      {d.title}
+      {external && <span class="wc__ext" aria-label="opens in a new tab">↗</span>}
+    </a>
+  </h3>
+
+  <p class="wc__excerpt">{d.excerpt}</p>
+</article>
+
+<style>
+  .wc {
+    position: relative;
+    display: grid;
+    gap: var(--sp-3);
+    padding-block: var(--sp-6);
+    border-bottom: var(--line) solid var(--rule);
+  }
+
+  .wc__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-3);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+
+  .wc__kind {
+    color: var(--accent);
+  }
+
+  .wc__meta > * + *::before {
+    content: '·';
+    margin-right: var(--sp-3);
+  }
+
+  .wc__title {
+    font-size: clamp(1.375rem, 2.8vw, 2rem);
+    line-height: 1.12;
+    max-width: 24ch;
+  }
+
+  .wc__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .wc__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .wc:hover .wc__title {
+    color: var(--c-pink-deep);
+  }
+
+  .wc:has(a:focus-visible) {
+    outline: var(--line-thick) solid var(--c-pink-deep);
+    outline-offset: 6px;
+  }
+
+  .wc__title a:focus-visible {
+    outline: none;
+  }
+
+  .wc__ext {
+    font-size: 0.6em;
+    vertical-align: super;
+    color: var(--accent);
+  }
+
+  .wc__excerpt {
+    color: var(--fg-soft);
+    max-width: var(--measure-tight);
+  }
+
+  @media (min-width: 48rem) {
+    .wc {
+      grid-template-columns: 12rem minmax(0, 1fr);
+      gap: var(--sp-3) var(--grid-gap);
+      align-items: start;
+    }
+
+    .wc__meta {
+      flex-direction: column;
+      gap: var(--sp-1);
+      padding-top: 0.5em;
+    }
+
+    .wc__meta > * + *::before {
+      content: none;
+    }
+
+    .wc__title,
+    .wc__excerpt {
+      grid-column: 2;
+    }
+  }
+</style>

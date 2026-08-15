@@ -1,0 +1,48 @@
+---
+/**
+ * Empty state.
+ *
+ * This site is designed to grow, so empty is a normal condition rather
+ * than a bug. Sections that have nothing in them yet should say so
+ * plainly instead of collapsing into a broken-looking gap.
+ */
+interface Props {
+  title?: string;
+  line?: string;
+}
+
+const {
+  title = 'Nothing here yet.',
+  line = 'This corner is still under construction. Something is on its way.',
+} = Astro.props;
+---
+
+<div class="empty">
+  <p class="empty__title">{title}</p>
+  <p class="empty__line">{line}</p>
+</div>
+
+<style>
+  .empty {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-8) var(--sp-5);
+    border: var(--line) dashed var(--rule);
+    text-align: center;
+  }
+
+  .empty__title {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .empty__line {
+    font-size: var(--fs-small);
+    color: var(--fg-mute);
+    max-width: 42ch;
+    margin-inline: auto;
+  }
+</style>

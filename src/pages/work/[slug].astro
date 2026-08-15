@@ -1,0 +1,572 @@
+---
+/**
+ * The case-study template.
+ *
+ * One layout, every project. Adding a new project means adding a
+ * Markdown file — this file never needs to change.
+ *
+ * Two modes:
+ *   published  full case study
+ *   building / planned  an honest "here is the plan" page, with no
+ *                       pretence that the work is finished
+ *
+ * Results are handled structurally rather than editorially: real work
+ * renders `metrics`, speculative work renders `measurement` under the
+ * heading "What I would measure". There is no code path that renders
+ * an invented outcome.
+ */
+import { render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectVisual from '@components/ProjectVisual.astro';
+import Tag from '@components/Tag.astro';
+import Button from '@components/Button.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getAllWork, TYPE_LABEL, STATUS_LABEL } from '@lib/content';
+import { asset, url } from '@lib/url';
+
+export async function getStaticPaths() {
+  const entries = await getAllWork();
+  return entries.map((entry, i, arr) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      prev: arr[i - 1] ?? null,
+      next: arr[i + 1] ?? null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+
+const isLive = d.status === 'published';
+const isSpeculative = d.type === 'speculative';
+
+/* Facts for the hero table. Only the ones that actually apply. */
+const facts = [
+  d.org && { k: 'Where', v: d.org },
+  { k: 'Role', v: d.role },
+  { k: 'Industry', v: d.industry },
+  d.businessModel !== 'NA' && { k: 'Model', v: d.businessModel },
+  d.period && { k: 'When', v: d.period },
+].filter(Boolean) as { k: string; v: string }[];
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.summary}
+  type="article"
+  publishedTime={d.date}
+  image={d.heroImage ?? d.thumbnail}
+  imageAlt={d.heroImageAlt ?? d.title}
+>
+  <!-- ================= HERO ================= -->
+  <article class="cs">
+    <header class="cs__hero">
+      <div class="wrap">
+        <nav class="cs__back" aria-label="Breadcrumb">
+          <a class="link" href={url('/work')}>← All work</a>
+        </nav>
+
+        <div class="cs__labels">
+          <Tag tone="type" type={d.type}>{TYPE_LABEL[d.type]}</Tag>
+          {!isLive && <Tag tone="status">{STATUS_LABEL[d.status]}</Tag>}
+        </div>
+
+        <h1 class="cs__title">{d.title}</h1>
+        <p class="lead cs__subtitle">{d.subtitle}</p>
+
+        {
+          isSpeculative && (
+            <p class="cs__disclaimer">
+              <strong>Speculative work.</strong> Nobody commissioned this. It
+              did not run, there are no client results, and it is not
+              affiliated with any brand referenced in it.
+            </p>
+          )
+        }
+
+        <dl class="cs__facts">
+          {
+            facts.map((f) => (
+              <div>
+                <dt>{f.k}</dt>
+                <dd>{f.v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        {
+          d.capabilities.length > 0 && (
+            <ul class="cs__caps">
+              {d.capabilities.map((c) => (
+                <li>
+                  <Tag>{c}</Tag>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="wrap cs__visual">
+      <ProjectVisual
+        src={d.heroImage ?? d.thumbnail}
+        alt={d.heroImageAlt ?? ''}
+        title={d.title}
+        accent={d.accent}
+        type={d.type}
+        ratio="16 / 9"
+        eager
+      />
+    </div>
+
+    <!-- ================= METRICS ================= -->
+    {
+      isLive && d.metrics.length > 0 && (
+        <section class="cs__metrics" data-surface="ink" aria-label="Results">
+          <div class="wrap">
+            <ul>
+              {d.metrics.map((m) => (
+                <li>
+                  <span class="cs__metric-value">{m.value}</span>
+                  <span class="cs__metric-label">{m.label}</span>
+                  {m.context && <span class="cs__metric-context">{m.context}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- ================= BODY ================= -->
+    <div class="wrap cs__body">
+      <div class="cs__rail">
+        <div class="cs__toc">
+          <p class="label">
+            {isLive ? 'Observe → interpret → recommend → create' : 'The plan'}
+          </p>
+        </div>
+      </div>
+
+      <div class="prose cs__prose">
+        <Content />
+      </div>
+    </div>
+
+    <!-- ================= WHAT I WOULD MEASURE ================= -->
+    {
+      d.measurement.length > 0 && (
+        <section class="wrap cs__measure" aria-labelledby="measure-h">
+          <div class="cs__measure-inner">
+            <h2 id="measure-h" class="cs__measure-title">
+              What I would measure
+            </h2>
+            <p class="cs__measure-note">
+              This work has not run, so there are no results to report. These
+              are the things I would track, and why they would tell me
+              something.
+            </p>
+            <ol class="cs__measure-list">
+              {d.measurement.map((m) => (
+                <li>{m}</li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- ================= GALLERY ================= -->
+    {
+      d.gallery.length > 0 && (
+        <section class="wrap cs__gallery" aria-label="Selected assets">
+          <p class="label cs__gallery-label">The work</p>
+          <div class="cs__gallery-grid">
+            {d.gallery.map((img) => (
+              <figure>
+                <img src={asset(img.src)} alt={img.alt} loading="lazy" decoding="async" />
+                {img.caption && <figcaption>{img.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- ================= TL;DR ================= -->
+    {
+      d.tldr && (
+        <section class="cs__tldr" data-surface="paper-deep" aria-labelledby="tldr-h">
+          <div class="wrap">
+            <h2 id="tldr-h" class="cs__tldr-title">
+              TL;DR
+            </h2>
+            <dl class="cs__tldr-grid">
+              <div>
+                <dt>Problem</dt>
+                <dd>{d.tldr.problem}</dd>
+              </div>
+              <div>
+                <dt>Approach</dt>
+                <dd>{d.tldr.approach}</dd>
+              </div>
+              <div>
+                <dt>{isLive && !isSpeculative ? 'Impact' : 'Intended outcome'}</dt>
+                <dd>{d.tldr.impact}</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      d.links.length > 0 && (
+        <div class="wrap cs__links">
+          {d.links.map((l) => (
+            <Button href={l.href} variant="ghost">
+              {l.label}
+            </Button>
+          ))}
+        </div>
+      )
+    }
+
+    <!-- ================= PREV / NEXT ================= -->
+    <nav class="wrap cs__nav" aria-label="More work">
+      {
+        prev ? (
+          <a class="cs__nav-link" href={url(`/work/${prev.id}`)}>
+            <span class="label">Previous</span>
+            <span class="cs__nav-title">{prev.data.title}</span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a class="cs__nav-link cs__nav-link--next" href={url(`/work/${next.id}`)}>
+            <span class="label">Next</span>
+            <span class="cs__nav-title">{next.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+
+  <CtaBand
+    headline={isLive ? 'Recognise the problem?' : 'Want to see this when it is done?'}
+    line={
+      isLive
+        ? 'If any of that sounded like your situation, that is usually the point at which it is worth a conversation.'
+        : 'It will land here when it is finished. In the meantime, the work that is done is worth a look.'
+    }
+    ctaLabel={isLive ? 'Work with me' : 'See finished work'}
+    ctaHref={isLive ? '/contact' : '/work'}
+  />
+</BaseLayout>
+
+<style>
+  .cs__hero {
+    padding-block: clamp(2rem, 5vw, 3.5rem) var(--sp-7);
+  }
+
+  .cs__back {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  .cs__labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-6);
+  }
+
+  .cs__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+    max-width: 18ch;
+  }
+
+  .cs__subtitle {
+    margin-top: var(--sp-5);
+    max-width: 52ch;
+  }
+
+  .cs__disclaimer {
+    margin-top: var(--sp-5);
+    padding: var(--sp-4);
+    border-left: var(--line-heavy) solid var(--c-cyan);
+    background: var(--c-paper-deep);
+    font-size: var(--fs-small);
+    color: var(--c-ink-soft);
+    max-width: var(--measure);
+  }
+
+  .cs__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--sp-4);
+    margin-top: var(--sp-7);
+    padding-top: var(--sp-5);
+    border-top: var(--line-thick) solid var(--c-ink);
+  }
+
+  .cs__facts dt {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .cs__facts dd {
+    margin: var(--sp-1) 0 0;
+    font-size: var(--fs-small);
+    font-weight: 500;
+  }
+
+  .cs__caps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-5);
+    padding: 0;
+    list-style: none;
+  }
+
+  .cs__visual {
+    margin-bottom: var(--sp-8);
+  }
+
+  /* ---- Metrics band ---- */
+  .cs__metrics {
+    padding-block: var(--sp-8);
+  }
+
+  .cs__metrics ul {
+    display: grid;
+    gap: var(--sp-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cs__metrics li {
+    display: grid;
+    gap: var(--sp-1);
+    padding-top: var(--sp-4);
+    border-top: var(--line-thick) solid var(--c-rule-ink);
+  }
+
+  .cs__metric-value {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(2.5rem, 5.5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--c-pink);
+  }
+
+  .cs__metric-label {
+    font-size: var(--fs-small);
+    color: var(--fg);
+  }
+
+  .cs__metric-context {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    line-height: 1.5;
+    color: var(--fg-mute);
+  }
+
+  /* ---- Body ---- */
+  .cs__body {
+    display: grid;
+    gap: var(--sp-5);
+    padding-block: var(--section-y-tight);
+  }
+
+  .cs__prose {
+    min-width: 0;
+  }
+
+  /* ---- What I would measure ---- */
+  .cs__measure {
+    padding-block: var(--sp-6) var(--section-y-tight);
+  }
+
+  .cs__measure-inner {
+    max-width: var(--measure);
+    padding: var(--sp-6);
+    border: var(--line-thick) solid var(--c-cyan);
+    background: var(--c-paper);
+  }
+
+  .cs__measure-title {
+    font-size: var(--fs-h3);
+  }
+
+  .cs__measure-note {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-small);
+    color: var(--c-ink-soft);
+  }
+
+  .cs__measure-list {
+    margin: var(--sp-5) 0 0;
+    padding-left: var(--sp-5);
+    display: grid;
+    gap: var(--sp-3);
+    color: var(--c-ink-soft);
+  }
+
+  .cs__measure-list li::marker {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    color: #0d5f6b;
+  }
+
+  /* ---- Gallery ---- */
+  .cs__gallery {
+    padding-block: var(--section-y-tight);
+  }
+
+  .cs__gallery-label {
+    margin-bottom: var(--sp-5);
+  }
+
+  .cs__gallery-grid {
+    display: grid;
+    gap: var(--grid-gap);
+  }
+
+  .cs__gallery-grid figure {
+    margin: 0;
+  }
+
+  .cs__gallery-grid img {
+    width: 100%;
+    border: var(--line) solid var(--c-rule);
+  }
+
+  .cs__gallery-grid figcaption {
+    margin-top: var(--sp-3);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    line-height: 1.5;
+    color: var(--c-ink-mute);
+  }
+
+  /* ---- TL;DR ---- */
+  .cs__tldr {
+    padding-block: var(--section-y-tight);
+    border-block: var(--line-thick) solid var(--c-ink);
+  }
+
+  .cs__tldr-title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--sp-6);
+  }
+
+  .cs__tldr-grid {
+    display: grid;
+    gap: var(--sp-6);
+    margin: 0;
+  }
+
+  .cs__tldr-grid dt {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--c-pink-deep);
+    padding-bottom: var(--sp-3);
+    border-bottom: var(--line) solid var(--c-rule);
+  }
+
+  .cs__tldr-grid dd {
+    margin: var(--sp-3) 0 0;
+    color: var(--c-ink-soft);
+  }
+
+  .cs__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    padding-block: var(--sp-7);
+  }
+
+  /* ---- Prev / next ---- */
+  .cs__nav {
+    display: grid;
+    gap: var(--sp-5);
+    padding-block: var(--sp-8);
+    border-top: var(--line) solid var(--c-rule);
+  }
+
+  .cs__nav-link {
+    display: grid;
+    gap: var(--sp-2);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .cs__nav-link--next {
+    text-align: right;
+  }
+
+  .cs__nav-title {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: var(--fs-h4);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .cs__nav-link:hover .cs__nav-title {
+    color: var(--c-pink-deep);
+  }
+
+  @media (min-width: 40rem) {
+    .cs__metrics ul {
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: var(--sp-6);
+    }
+
+    .cs__tldr-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--sp-7);
+    }
+
+    .cs__nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .cs__body {
+      grid-template-columns: var(--rail-w) minmax(0, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    .cs__toc {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--sp-5));
+      border-top: var(--line-thick) solid var(--c-ink);
+      padding-top: var(--sp-3);
+    }
+  }
+</style>

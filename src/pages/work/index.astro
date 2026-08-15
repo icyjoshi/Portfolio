@@ -1,0 +1,317 @@
+---
+/**
+ * Work — the portfolio library.
+ *
+ * Grouped by how the work came about (professional / independent /
+ * speculative / experiment), because that distinction matters more
+ * than chronology and must never be blurred.
+ *
+ * Filtering is two dimensions only — type and business model. Enough
+ * to be useful, not so much that it becomes a database interface.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import EmptyState from '@components/EmptyState.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getAllWork, workGroups, TYPE_LABEL } from '@lib/content';
+
+const all = await getAllWork();
+
+const models = [...new Set(all.map((e) => e.data.businessModel))]
+  .filter((m) => m !== 'NA')
+  .sort();
+
+const grouped = workGroups
+  .map((g) => ({ ...g, items: all.filter((e) => e.data.type === g.id) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<BaseLayout
+  title="Work"
+  description="Case studies and projects by Ayushi Joshi across brand, campaigns, content, community and analytics — clearly labelled as professional, independent, speculative or experimental."
+>
+  <!-- ============ HEADER ============ -->
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label label--accent">Work</p>
+      <h1 class="page-head__title">Everything, labelled honestly</h1>
+      <p class="lead page-head__lead">
+        Client work, projects nobody asked for, and speculative campaigns for
+        brands that have never heard of me. Which is which is marked on every
+        single one, because pretending otherwise is the easiest way to lose
+        someone's trust.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FILTERS ============ -->
+  <div class="filters" data-filters>
+    <div class="wrap filters__inner">
+      <fieldset class="filters__group">
+        <legend class="label">Type</legend>
+        <div class="filters__chips">
+          <button class="chip is-on" data-filter="type" data-value="all" aria-pressed="true">
+            All
+          </button>
+          {
+            workGroups.map((g) => (
+              <button class="chip" data-filter="type" data-value={g.id} aria-pressed="false">
+                {TYPE_LABEL[g.id]}
+              </button>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="filters__group">
+        <legend class="label">Business model</legend>
+        <div class="filters__chips">
+          <button class="chip is-on" data-filter="model" data-value="all" aria-pressed="true">
+            All
+          </button>
+          {
+            models.map((m) => (
+              <button class="chip" data-filter="model" data-value={m} aria-pressed="false">
+                {m}
+              </button>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <p class="filters__count" data-count aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- ============ GROUPS ============ -->
+  {
+    grouped.map((group, gi) => (
+      <RailSection
+        num={String(gi + 1).padStart(2, '0')}
+        note={group.note}
+        id={group.id}
+        surface={gi % 2 === 1 ? 'paper-deep' : 'paper'}
+        data-group={group.id}
+      >
+        <h2 class="group__title">{group.title}</h2>
+
+        <div class="group__list">
+          {group.items.map((entry, i) => (
+            <ProjectCard
+              entry={entry}
+              layout="row"
+              index={String(i + 1).padStart(2, '0')}
+            />
+          ))}
+        </div>
+
+      </RailSection>
+    ))
+  }
+
+  {
+    grouped.length === 0 && (
+      <div class="wrap section">
+        <EmptyState
+          title="No work here yet."
+          line="Add a Markdown file to src/content/work/ and it will appear right here."
+        />
+      </div>
+    )
+  }
+
+  <CtaBand
+    headline="Want this kind of thinking on your problem?"
+    line="If something in here looks like the shape of what you are dealing with, that is usually a good sign."
+  />
+</BaseLayout>
+
+<script>
+  /* Filtering. Plain DOM work — no framework needed for two facets.
+     Cards carry their own data attributes, set below on mount so the
+     markup stays clean. */
+  const root = document.querySelector<HTMLElement>('[data-filters]');
+  const sections = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-group]'),
+  );
+  const countEl = document.querySelector<HTMLElement>('[data-count]');
+
+  if (root && sections.length) {
+    const state: Record<string, string> = { type: 'all', model: 'all' };
+
+    /* Cards are ProjectCard articles; read their facts from the DOM. */
+    type Card = { el: HTMLElement; type: string; model: string };
+    const cards: Card[] = [];
+
+    sections.forEach((section) => {
+      const type = section.dataset.group ?? '';
+      section.querySelectorAll<HTMLElement>('.pc').forEach((el) => {
+        const facts = el.querySelector('.pc__facts')?.textContent ?? '';
+        const model = ['B2B2C', 'B2B', 'B2C', 'D2C'].find((m) =>
+          new RegExp(`\\b${m}\\b`).test(facts),
+        );
+        cards.push({ el, type, model: model ?? 'NA' });
+      });
+    });
+
+    const apply = () => {
+      let visible = 0;
+
+      for (const card of cards) {
+        const okType = state.type === 'all' || card.type === state.type;
+        const okModel = state.model === 'all' || card.model === state.model;
+        const show = okType && okModel;
+        card.el.hidden = !show;
+        if (show) visible += 1;
+      }
+
+      /* Hide a whole group when nothing in it survives the filter. */
+      for (const section of sections) {
+        const groupCards = cards.filter((c) => c.el.closest('section') === section);
+        const any = groupCards.some((c) => !c.el.hidden);
+        section.hidden = !any;
+      }
+
+      if (countEl) {
+        countEl.textContent =
+          visible === cards.length
+            ? `${cards.length} projects`
+            : `${visible} of ${cards.length} projects`;
+      }
+    };
+
+    root.querySelectorAll<HTMLButtonElement>('.chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const facet = chip.dataset.filter!;
+        const value = chip.dataset.value!;
+        state[facet] = value;
+
+        root
+          .querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${facet}"]`)
+          .forEach((sibling) => {
+            const on = sibling === chip;
+            sibling.classList.toggle('is-on', on);
+            sibling.setAttribute('aria-pressed', String(on));
+          });
+
+        apply();
+      });
+    });
+
+    apply();
+  }
+</script>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--sp-7);
+  }
+
+  .page-head__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+  }
+
+  .page-head__lead {
+    margin-top: var(--sp-5);
+    max-width: 54ch;
+  }
+
+  /* ---- Filters ---- */
+  .filters {
+    position: sticky;
+    top: var(--nav-h);
+    z-index: 20;
+    background: var(--c-paper);
+    border-block: var(--line) solid var(--c-rule);
+    padding-block: var(--sp-4);
+  }
+
+  .filters__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-4) var(--sp-6);
+  }
+
+  .filters__group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .filters__group legend {
+    float: left;
+    padding-right: var(--sp-3);
+  }
+
+  .filters__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .chip {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45em 0.8em;
+    border: var(--line) solid var(--c-rule);
+    border-radius: var(--r-xs);
+    color: var(--c-ink-soft);
+    background: transparent;
+    transition:
+      background-color var(--t-fast) var(--ease),
+      color var(--t-fast) var(--ease),
+      border-color var(--t-fast) var(--ease);
+  }
+
+  .chip:hover {
+    border-color: var(--c-ink);
+    color: var(--c-ink);
+  }
+
+  .chip.is-on {
+    background: var(--c-ink);
+    border-color: var(--c-ink);
+    color: var(--c-paper);
+  }
+
+  .filters__count {
+    margin-left: auto;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  /* ---- Groups ---- */
+  .group__title {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--sp-5);
+  }
+
+  .group__list :global(.pc:first-child) {
+    border-top: var(--line-thick) solid var(--fg);
+  }
+
+  @media (max-width: 40rem) {
+    .filters {
+      position: static;
+    }
+
+    .filters__count {
+      margin-left: 0;
+    }
+  }
+</style>

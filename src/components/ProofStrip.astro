@@ -1,0 +1,103 @@
+---
+/**
+ * The proof strip.
+ *
+ * A number is never allowed here without the sentence that makes it
+ * mean something, and each one links to the work it came from. If a
+ * metric can't be traced to a project, it doesn't belong on the site.
+ */
+import { proofStrip } from '@data/capabilities';
+import { url } from '@lib/url';
+---
+
+<div class="proof" data-surface="ink">
+  <div class="wrap">
+    <p class="label proof__eyebrow">Receipts</p>
+    <ul class="proof__list">
+      {
+        proofStrip.map((m) => (
+          <li class="proof__item" data-reveal data-reveal-group="proof">
+            <a class="proof__link" href={url(m.href)}>
+              <span class="proof__value">{m.value}</span>
+              <span class="proof__label">{m.label}</span>
+              <span class="proof__context">{m.context}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style>
+  .proof {
+    padding-block: var(--sp-9);
+  }
+
+  .proof__eyebrow {
+    color: var(--accent);
+    margin-bottom: var(--sp-6);
+  }
+
+  .proof__list {
+    display: grid;
+    gap: var(--sp-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .proof__link {
+    display: grid;
+    gap: var(--sp-2);
+    text-decoration: none;
+    padding-top: var(--sp-4);
+    border-top: var(--line-thick) solid var(--c-rule-ink);
+    transition: border-color var(--t-base) var(--ease);
+  }
+
+  .proof__link:hover,
+  .proof__link:focus-visible {
+    border-top-color: var(--c-pink);
+  }
+
+  .proof__value {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(2.75rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--c-paper);
+  }
+
+  .proof__link:hover .proof__value {
+    color: var(--c-pink);
+  }
+
+  .proof__label {
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .proof__context {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    line-height: 1.5;
+    color: var(--fg-mute);
+  }
+
+  @media (min-width: 40rem) {
+    .proof__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--sp-7) var(--sp-6);
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .proof__list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

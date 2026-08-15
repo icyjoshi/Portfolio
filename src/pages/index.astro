@@ -1,10 +1,360 @@
 ---
+/**
+ * Homepage.
+ *
+ * A trailer, not the movie: positioning, proof, selected work,
+ * capabilities, what's in progress, a short About, and the CTA.
+ * Everything else is a click away.
+ */
 import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import Button from '@components/Button.astro';
+import Marquee from '@components/Marquee.astro';
+import ProofStrip from '@components/ProofStrip.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import Capabilities from '@components/Capabilities.astro';
+import CurrentlyInLab from '@components/CurrentlyInLab.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getFeaturedWork } from '@lib/content';
+import { site } from '@data/site';
+import { url } from '@lib/url';
+
+const featured = await getFeaturedWork(4);
+
+/* The chain the whole site is organised around. */
+const chain = [
+  'Audience',
+  'Insight',
+  'Idea',
+  'Words',
+  'Visual',
+  'Campaign',
+  'Channel',
+  'Data',
+  'Optimisation',
+];
 ---
 
-<BaseLayout>
-  <div class="wrap section">
-    <h1 class="display">Smoke test</h1>
-    <p class="lead">Replaced in M6.</p>
-  </div>
+<BaseLayout
+  description="Ayushi Joshi — a multidisciplinary marketer working across brand, campaigns, content, analytics and AI. Case studies, services and a lab of work in progress."
+>
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="label hero__now">
+        <span class="hero__dot" aria-hidden="true"></span>
+        {site.availability}
+      </p>
+
+      <h1 class="hero__title">
+        <span class="hero__line-1">I <span class="mark">notice</span> things.</span>
+        <span class="hero__line-2">Then I make something out of them.</span>
+      </h1>
+
+      <div class="hero__foot">
+        <div class="hero__pitch">
+          <p class="lead hero__sub">
+            A multidisciplinary marketer, currently doing an MBA, interested in
+            what happens when audience insight, creative thinking, analytics and
+            AI collide.
+          </p>
+
+          <div class="hero__actions">
+            <Button href="/work" variant="solid" size="lg">See the work</Button>
+            <Button href="/contact" variant="ghost" size="lg">Work with me</Button>
+          </div>
+        </div>
+
+        <aside class="hero__aside">
+          <p class="annot">Unfortunately, I noticed the marketing.</p>
+          <dl class="hero__facts">
+            <div>
+              <dt>Doing</dt>
+              <dd>MBA Marketing, MIT-WPU</dd>
+            </div>
+            <div>
+              <dt>Done</dt>
+              <dd>2+ years across brand, content, campaigns, community &amp; analytics</dd>
+            </div>
+            <div>
+              <dt>Also</dt>
+              <dd><a class="link" href={url(site.resume)}>Résumé (PDF)</a></dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Marquee items={chain} />
+
+  <!-- ================= PROOF ================= -->
+  <ProofStrip />
+
+  <!-- ================= SELECTED WORK ================= -->
+  <RailSection num="01" note="Three to five things I am willing to be judged on.">
+    <SectionHeading
+      kicker="Selected work"
+      title="Some things I made, and why"
+      lead="Every one of these follows the same shape: what I noticed, what I think it meant, what I decided to do, and what happened next."
+    />
+
+    <div class="features">
+      {
+        featured.map((entry, i) => (
+          <ProjectCard
+            entry={entry}
+            layout="feature"
+            index={String(i + 1).padStart(2, '0')}
+            eager={i === 0}
+          />
+        ))
+      }
+    </div>
+
+    <p class="more">
+      <Button href="/work" variant="text">See everything, including the messy bits</Button>
+    </p>
+  </RailSection>
+
+  <!-- ================= WHAT I DO ================= -->
+  <RailSection
+    num="02"
+    note="Not a skills list. Each one has to point at proof."
+    surface="paper-deep"
+    ruled
+  >
+    <SectionHeading
+      kicker="What I do"
+      title="I connect the pieces"
+      lead="The reason the list is wide is that the problems are. A positioning question turns into a copy question turns into a funnel question, usually within one meeting."
+    />
+    <Capabilities />
+  </RailSection>
+
+  <!-- ================= CURRENTLY IN THE LAB ================= -->
+  <RailSection num="03" note="This section is why the site is never finished.">
+    <SectionHeading
+      kicker="Currently in the lab"
+      title="Things that are not done yet"
+      lead="Six independent projects in various states of half-built. They move into Work when they earn it."
+    >
+      <p class="annot lab-annot">Currently making a thing. Come back when it is less embarrassing.</p>
+    </SectionHeading>
+
+    <CurrentlyInLab />
+
+    <p class="more">
+      <Button href="/lab" variant="text">Read the Lab</Button>
+    </p>
+  </RailSection>
+
+  <!-- ================= SHORT ABOUT ================= -->
+  <section class="about-short" data-surface="ink">
+    <div class="wrap">
+      <div class="about-short__grid">
+        <div>
+          <p class="label label--accent">Who is doing all this</p>
+          <p class="about-short__body">
+            I am an MBA Marketing student with about two years across content,
+            social, campaigns, community, research and analytics. That range is
+            deliberate — I would rather be useful across the whole chain than
+            excellent at one square of it and helpless everywhere else.
+          </p>
+          <p class="about-short__body">
+            I like words, I like numbers when they change a decision, and I use
+            AI for the parts of the job that benefit from speed rather than
+            taste.
+          </p>
+          <div class="about-short__actions">
+            <Button href="/about" variant="ghost">More about how I think</Button>
+          </div>
+        </div>
+
+        <figure class="pull">
+          <blockquote>AI is the multiplier. I am still the marketer.</blockquote>
+          <figcaption class="label">On the tooling question</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    headline="Have a brief? Let's make it interesting."
+    line="Freelance work across brand strategy, campaigns, content and research. Full-time conversations equally welcome."
+    note="Half-formed briefs accepted. I will ask the annoying questions."
+  />
 </BaseLayout>
+
+<style>
+  /* ---------------- Hero ---------------- */
+  .hero {
+    padding-block: clamp(3rem, 8vw, 6.5rem) clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .hero__now {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: var(--sp-6);
+  }
+
+  .hero__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--r-pill);
+    background: var(--c-pink);
+    flex: none;
+  }
+
+  .hero__title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-display);
+    font-weight: 500;
+    font-variation-settings: var(--wonk-on);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-display);
+    display: grid;
+    text-wrap: balance;
+  }
+
+  /* The second sentence steps in — a paragraph indent at display size.
+     It is the "then" of the idea, and it should read as a beat later. */
+  .hero__line-2 {
+    color: var(--c-ink-soft);
+  }
+
+  .hero__foot {
+    display: grid;
+    gap: var(--sp-7);
+    margin-top: var(--sp-8);
+    padding-top: var(--sp-6);
+    border-top: var(--line-thick) solid var(--c-ink);
+  }
+
+  .hero__sub {
+    max-width: 40ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    margin-top: var(--sp-6);
+  }
+
+  .hero__aside {
+    display: grid;
+    gap: var(--sp-5);
+    align-content: start;
+  }
+
+  .hero__facts {
+    display: grid;
+    gap: var(--sp-3);
+    margin: 0;
+  }
+
+  .hero__facts > div {
+    display: grid;
+    gap: 2px;
+    padding-top: var(--sp-2);
+    border-top: var(--line) solid var(--c-rule);
+  }
+
+  .hero__facts dt {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .hero__facts dd {
+    margin: 0;
+    font-size: var(--fs-small);
+  }
+
+  @media (min-width: 56rem) {
+    .hero__line-2 {
+      padding-left: 2.5ch;
+    }
+
+    .hero__foot {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: var(--sp-9);
+      align-items: start;
+    }
+  }
+
+  /* ---------------- Shared ---------------- */
+  .features {
+    display: grid;
+    gap: var(--sp-8);
+  }
+
+  .features > :global(.pc + .pc) {
+    border-top: var(--line) solid var(--rule);
+    padding-top: var(--sp-8);
+  }
+
+  .more {
+    margin-top: var(--sp-7);
+  }
+
+  .lab-annot {
+    margin-top: var(--sp-4);
+  }
+
+  /* ---------------- Short about ---------------- */
+  .about-short {
+    padding-block: var(--section-y);
+  }
+
+  .about-short__grid {
+    display: grid;
+    gap: var(--sp-8);
+  }
+
+  .about-short__body {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--fg-soft);
+    max-width: 52ch;
+  }
+
+  .about-short__actions {
+    margin-top: var(--sp-6);
+  }
+
+  .pull {
+    margin: 0;
+    padding: var(--sp-6) 0 0;
+    border-top: var(--line-heavy) solid var(--c-pink);
+    align-self: start;
+  }
+
+  .pull blockquote {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--c-paper);
+  }
+
+  .pull figcaption {
+    margin-top: var(--sp-4);
+  }
+
+  @media (min-width: 56rem) {
+    .about-short__grid {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: var(--sp-10);
+    }
+  }
+</style>

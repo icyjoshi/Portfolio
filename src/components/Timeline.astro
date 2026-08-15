@@ -1,0 +1,147 @@
+---
+/**
+ * Experience timeline.
+ *
+ * Concise on purpose — experience is proof, not the portfolio. Each
+ * role links through to the case study that goes deeper, which is
+ * where the actual thinking lives.
+ */
+import { experience } from '@data/experience';
+import { url } from '@lib/url';
+
+interface Props {
+  /** Show only the first N roles, with a link to the rest. */
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+const roles = limit ? experience.slice(0, limit) : experience;
+---
+
+<ol class="tl">
+  {
+    roles.map((r) => (
+      <li class="tl__item" data-reveal data-reveal-group="tl">
+        <div class="tl__when">
+          <span class="tl__period">{r.period}</span>
+        </div>
+
+        <div class="tl__what">
+          <h3 class="tl__title">
+            {r.title}
+            <span class="tl__org">{r.org}</span>
+          </h3>
+
+          <p class="tl__summary">{r.summary}</p>
+
+          <ul class="tl__highlights">
+            {r.highlights.map((h) => (
+              <li>{h}</li>
+            ))}
+          </ul>
+
+          {r.caseStudy && (
+            <a class="tl__more" href={url(`/work/${r.caseStudy}`)}>
+              The work behind it <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .tl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: var(--line-thick) solid var(--fg);
+  }
+
+  .tl__item {
+    display: grid;
+    gap: var(--sp-3);
+    padding-block: var(--sp-6);
+    border-bottom: var(--line) solid var(--rule);
+  }
+
+  .tl__period {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .tl__title {
+    font-size: var(--fs-h3);
+    line-height: 1.15;
+    display: grid;
+    gap: 2px;
+  }
+
+  .tl__org {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+
+  .tl__summary {
+    margin-top: var(--sp-3);
+    color: var(--fg-soft);
+    max-width: var(--measure-tight);
+  }
+
+  .tl__highlights {
+    margin-top: var(--sp-4);
+    padding-left: var(--sp-5);
+    display: grid;
+    gap: var(--sp-2);
+    font-size: var(--fs-small);
+    color: var(--fg-soft);
+    max-width: var(--measure);
+  }
+
+  .tl__highlights li::marker {
+    color: var(--accent-loud);
+  }
+
+  .tl__more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-4);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .tl__more span {
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .tl__more:hover span,
+  .tl__more:focus-visible span {
+    transform: translateX(calc(4px * var(--motion)));
+  }
+
+  @media (min-width: 48rem) {
+    .tl__item {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    .tl__when {
+      padding-top: 0.4em;
+    }
+  }
+</style>

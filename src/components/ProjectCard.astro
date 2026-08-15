@@ -1,0 +1,296 @@
+---
+/**
+ * Project card, in two layouts.
+ *
+ *   feature — large, alternating image/text. Homepage and the top of
+ *             the Work page. This is the one that has to be impressive.
+ *   row     — a ruled editorial list row. Dense, scannable, no boxes.
+ *
+ * The whole card is clickable via a stretched link on the title, so
+ * there is exactly one link in the tab order per card rather than four.
+ */
+import type { WorkEntry } from '@lib/content';
+import { TYPE_LABEL_SHORT, STATUS_LABEL } from '@lib/content';
+import { url } from '@lib/url';
+import ProjectVisual from './ProjectVisual.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+  entry: WorkEntry;
+  layout?: 'feature' | 'row';
+  /** Index shown in the margin, e.g. "01". */
+  index?: string;
+  eager?: boolean;
+}
+
+const { entry, layout = 'row', index, eager = false } = Astro.props;
+const d = entry.data;
+const href = url(`/work/${entry.id}`);
+const isLive = d.status === 'published';
+---
+
+<article
+  class={`pc pc--${layout}`}
+  data-accent={d.accent}
+  data-reveal
+  data-reveal-group="work"
+>
+  <div class="pc__media">
+    <ProjectVisual
+      src={d.thumbnail}
+      alt={d.heroImageAlt ?? ''}
+      title={d.title}
+      accent={d.accent}
+      type={d.type}
+      ratio={layout === 'feature' ? '4 / 3' : '16 / 9'}
+      eager={eager}
+    />
+  </div>
+
+  <div class="pc__body">
+    <div class="pc__meta">
+      {index && <span class="pc__index">{index}</span>}
+      <Tag tone="type" type={d.type}>{TYPE_LABEL_SHORT[d.type]}</Tag>
+      {
+        !isLive && (
+          <Tag tone="status">{STATUS_LABEL[d.status]}</Tag>
+        )
+      }
+    </div>
+
+    <h3 class="pc__title">
+      <a href={href} class="pc__link">{d.title}</a>
+    </h3>
+
+    <p class="pc__sub">{d.subtitle}</p>
+
+    <ul class="pc__facts">
+      {d.org && <li>{d.org}</li>}
+      <li>{d.industry}</li>
+      {d.businessModel !== 'NA' && <li>{d.businessModel}</li>}
+      {d.period && <li>{d.period}</li>}
+    </ul>
+
+    {
+      d.capabilities.length > 0 && (
+        <ul class="pc__caps">
+          {d.capabilities.slice(0, 4).map((c) => (
+            <li>
+              <Tag>{c}</Tag>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      layout === 'feature' && d.metrics.length > 0 && (
+        <ul class="pc__metrics">
+          {d.metrics.slice(0, 2).map((m) => (
+            <li>
+              <span class="pc__metric-value">{m.value}</span>
+              <span class="pc__metric-label">{m.label}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <span class="pc__cue" aria-hidden="true">
+      {isLive ? 'Read the case study' : 'See what it is'} <i>→</i>
+    </span>
+  </div>
+</article>
+
+<style>
+  .pc {
+    position: relative;
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  /* One stretched link = one tab stop per card. */
+  .pc__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .pc__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .pc__link:focus-visible {
+    outline: none;
+  }
+
+  .pc:has(.pc__link:focus-visible) {
+    outline: var(--line-thick) solid var(--c-pink-deep);
+    outline-offset: 8px;
+  }
+
+  .pc__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-3);
+  }
+
+  .pc__index {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-right: var(--sp-2);
+  }
+
+  .pc__title {
+    font-size: var(--fs-h3);
+    line-height: 1.1;
+  }
+
+  .pc:hover .pc__title {
+    color: var(--c-pink-deep);
+  }
+
+  .pc__sub {
+    margin-top: var(--sp-3);
+    color: var(--fg-soft);
+    max-width: 46ch;
+  }
+
+  .pc__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-3);
+    margin-top: var(--sp-4);
+    padding: 0;
+    list-style: none;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+
+  .pc__facts li + li::before {
+    content: '·';
+    margin-right: var(--sp-3);
+  }
+
+  .pc__caps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .pc__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-6);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: var(--line) solid var(--rule);
+    list-style: none;
+  }
+
+  .pc__metrics li {
+    display: grid;
+    gap: 2px;
+  }
+
+  .pc__metric-value {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--c-pink-deep);
+  }
+
+  .pc__metric-label {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fg-mute);
+  }
+
+  .pc__cue {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-5);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .pc__cue i {
+    font-style: normal;
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .pc:hover .pc__cue i {
+    transform: translateX(calc(5px * var(--motion)));
+  }
+
+  .pc:hover :global(.pv img) {
+    transform: scale(1.03);
+  }
+
+  /* ---- Row layout: an editorial list, not a box ---- */
+  .pc--row {
+    padding-block: var(--sp-6);
+    border-top: var(--line) solid var(--rule);
+  }
+
+  .pc--row .pc__title {
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  }
+
+  /* ---- Feature layout ---- */
+  .pc--feature {
+    padding-block: var(--sp-6);
+  }
+
+  .pc--feature .pc__title {
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  }
+
+  @media (min-width: 48rem) {
+    .pc--row {
+      grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+      gap: var(--grid-gap);
+      align-items: start;
+    }
+
+    .pc--feature {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    /* Alternate sides so a column of features doesn't march. */
+    .pc--feature:nth-child(even) .pc__media {
+      order: 2;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .pc--feature .pc__media {
+      /* A slight lift out of the grid — editorial, not decorative. */
+      margin-block: calc(-1 * var(--sp-4));
+    }
+  }
+</style>

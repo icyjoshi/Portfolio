@@ -1,0 +1,157 @@
+---
+/**
+ * The image slot for a project.
+ *
+ * When there is a real image, it shows the image. When there isn't —
+ * which is most of the time on a portfolio that is still filling up —
+ * it renders a typographic plate instead: the project's initials set
+ * large over its accent colour, with ruled lines and the project type.
+ *
+ * This is the deliberate answer to "what goes in the empty space".
+ * Not a stock photo, not an illustration. Type, colour and rules.
+ */
+import { asset } from '@lib/url';
+import { TYPE_LABEL_SHORT } from '@lib/content';
+
+interface Props {
+  src?: string;
+  alt?: string;
+  title: string;
+  accent: 'pink' | 'yellow' | 'cyan' | 'lime' | 'ink';
+  type: string;
+  /** Aspect ratio of the slot. */
+  ratio?: '4 / 3' | '16 / 9' | '3 / 4' | '1 / 1';
+  eager?: boolean;
+}
+
+const {
+  src,
+  alt = '',
+  title,
+  accent,
+  type,
+  ratio = '4 / 3',
+  eager = false,
+} = Astro.props;
+
+/* Initials from the project title — up to three letters. */
+const initials = title
+  .replace(/[^\p{L}\p{N} ]/gu, '')
+  .split(/\s+/)
+  .filter((w) => w.length > 2 || /^\d/.test(w))
+  .slice(0, 3)
+  .map((w) => w[0]?.toUpperCase() ?? '')
+  .join('');
+---
+
+<div class="pv" data-accent={accent} style={`--ratio:${ratio}`}>
+  {
+    src ? (
+      <img
+        src={asset(src)}
+        alt={alt}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    ) : (
+      <div class="pv__plate" aria-hidden="true">
+        <span class="pv__initials">{initials || '—'}</span>
+        <span class="pv__type">{TYPE_LABEL_SHORT[type] ?? type}</span>
+        <span class="pv__rules" />
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .pv {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    background: var(--c-paper-deep);
+    border: var(--line) solid var(--c-rule);
+    /* Lets the plate's initials scale to the slot, not the viewport,
+       so the same component works in a wide hero and a narrow card. */
+    container-type: inline-size;
+  }
+
+  .pv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--t-slow) var(--ease-out);
+  }
+
+  /* ---- Typographic plate ---- */
+  .pv__plate {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--plate-bg, var(--c-paper-deep));
+    color: var(--plate-fg, var(--c-ink));
+  }
+
+  .pv[data-accent='pink'] .pv__plate {
+    --plate-bg: var(--c-pink);
+    --plate-fg: #fff;
+  }
+
+  .pv[data-accent='yellow'] .pv__plate {
+    --plate-bg: var(--c-yellow);
+    --plate-fg: var(--c-ink);
+  }
+
+  .pv[data-accent='cyan'] .pv__plate {
+    --plate-bg: var(--c-cyan);
+    --plate-fg: #0b3a42;
+  }
+
+  .pv[data-accent='lime'] .pv__plate {
+    --plate-bg: var(--c-lime);
+    --plate-fg: #33380a;
+  }
+
+  .pv[data-accent='ink'] .pv__plate {
+    --plate-bg: var(--c-ink);
+    --plate-fg: var(--c-paper);
+  }
+
+  .pv__initials {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 14cqi, 8rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    opacity: 0.92;
+    user-select: none;
+  }
+
+  .pv__type {
+    position: absolute;
+    left: var(--sp-4);
+    bottom: var(--sp-4);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  /* Ruled lines, like a notebook page showing through. */
+  .pv__rules {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      currentColor 27px,
+      currentColor 28px
+    );
+    opacity: 0.12;
+    pointer-events: none;
+  }
+</style>

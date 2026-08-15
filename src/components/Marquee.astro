@@ -1,0 +1,88 @@
+---
+/**
+ * A single slow marquee, used once on the homepage as the seam between
+ * the hero and the proof strip.
+ *
+ * It answers "why is this moving?" — it's a ticker of the capability
+ * chain, and a ticker is a thing that moves. It stops on hover and
+ * does not run at all under reduced-motion.
+ */
+interface Props {
+  items: readonly string[];
+}
+
+const { items } = Astro.props;
+/* Duplicated once so the loop has something to scroll into. */
+const track = [...items, ...items];
+---
+
+<div class="mq" data-surface="pink">
+  <div class="mq__track" aria-hidden="true">
+    {
+      track.map((item) => (
+        <span class="mq__item">
+          {item}
+          <i>◆</i>
+        </span>
+      ))
+    }
+  </div>
+  <p class="visually-hidden">{items.join(', ')}</p>
+</div>
+
+<style>
+  .mq {
+    overflow: hidden;
+    border-block: var(--line-thick) solid var(--c-ink);
+    padding-block: var(--sp-3);
+  }
+
+  .mq__track {
+    display: flex;
+    width: max-content;
+    animation: scroll 46s linear infinite;
+  }
+
+  .mq:hover .mq__track {
+    animation-play-state: paused;
+  }
+
+  .mq__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-5);
+    padding-right: var(--sp-5);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--fg);
+  }
+
+  .mq__item i {
+    font-style: normal;
+    font-size: 0.6em;
+    opacity: 0.5;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* The track is exactly two copies, so -50% is one full loop. */
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mq__track {
+      animation: none;
+      /* Without motion it becomes a static strip; hide the overflow copy. */
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+</style>

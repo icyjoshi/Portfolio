@@ -18,6 +18,8 @@ interface Props {
   class?: string;
   /** Draw a hairline across the top of the section. */
   ruled?: boolean;
+  /** Anything else (data-* attributes, aria-*) lands on the <section>. */
+  [key: string]: unknown;
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   tight = false,
   ruled = false,
   class: className = '',
+  ...rest
 } = Astro.props;
 ---
 
@@ -35,6 +38,7 @@ const {
   class={`section ${tight ? 'section--tight' : ''} ${className}`}
   id={id}
   data-surface={surface === 'paper' ? undefined : surface}
+  {...rest}
 >
   <div class="wrap">
     {ruled && <hr class="hr hr--heavy sec-rule" />}

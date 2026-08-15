@@ -1,0 +1,151 @@
+---
+/**
+ * "Currently in the lab" — the section that stops the site ever being
+ * finished.
+ *
+ * Reads straight from the work collection: anything whose `status` is
+ * not `published` appears here. Change one word in a project's
+ * frontmatter (building → published) and it moves itself into Work.
+ */
+import { getInProgressWork, STATUS_LABEL } from '@lib/content';
+import { url } from '@lib/url';
+
+const projects = await getInProgressWork();
+---
+
+{
+  projects.length > 0 && (
+    <ul class="lab-now">
+      {projects.map((p) => (
+        <li class="lab-now__item" data-reveal data-reveal-group="now">
+          <a class="lab-now__link" href={url(`/work/${p.id}`)}>
+            <span class="lab-now__status" data-status={p.data.status}>
+              {STATUS_LABEL[p.data.status]}
+            </span>
+            <span class="lab-now__title">{p.data.title}</span>
+            <span class="lab-now__sub">{p.data.subtitle}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .lab-now {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: var(--line) solid var(--rule);
+  }
+
+  .lab-now__item {
+    border-bottom: var(--line) solid var(--rule);
+  }
+
+  .lab-now__link {
+    display: grid;
+    gap: var(--sp-2);
+    padding-block: var(--sp-5);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left var(--t-base) var(--ease);
+  }
+
+  .lab-now__link:hover,
+  .lab-now__link:focus-visible {
+    padding-left: calc(var(--sp-3) * var(--motion));
+  }
+
+  .lab-now__status {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+  }
+
+  /* A small pulse — the only ambient motion on the site, and it earns
+     its place by meaning "this is actually happening right now". */
+  .lab-now__status::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: var(--r-pill);
+    background: var(--c-pink);
+    flex: none;
+  }
+
+  .lab-now__status[data-status='building']::before {
+    animation: pulse 2.6s var(--ease) infinite;
+  }
+
+  .lab-now__status[data-status='planned']::before {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--fg-mute);
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(0.78);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lab-now__status[data-status='building']::before {
+      animation: none;
+    }
+  }
+
+  .lab-now__title {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(1.375rem, 2.8vw, 2rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .lab-now__link:hover .lab-now__title {
+    color: var(--accent);
+  }
+
+  .lab-now__sub {
+    font-size: var(--fs-small);
+    color: var(--fg-soft);
+    max-width: 62ch;
+  }
+
+  @media (min-width: 48rem) {
+    .lab-now__link {
+      grid-template-columns: 9rem minmax(0, 1fr);
+      grid-template-areas:
+        'status title'
+        'status sub';
+      gap: var(--sp-1) var(--grid-gap);
+      align-items: baseline;
+    }
+
+    .lab-now__status {
+      grid-area: status;
+      padding-top: 0.35em;
+    }
+
+    .lab-now__title {
+      grid-area: title;
+    }
+
+    .lab-now__sub {
+      grid-area: sub;
+    }
+  }
+</style>

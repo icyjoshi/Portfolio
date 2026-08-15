@@ -1,0 +1,144 @@
+---
+/**
+ * Lab post card. Deliberately lighter than a project card — the Lab
+ * is the low-friction place, and the cards should feel that way.
+ */
+import type { LabEntry } from '@lib/content';
+import { formatDate } from '@lib/content';
+import { url } from '@lib/url';
+
+interface Props {
+  entry: LabEntry;
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+---
+
+<article class="lc" data-accent={d.accent} data-reveal data-reveal-group="lab">
+  <div class="lc__top">
+    <span class="lc__cat">{d.category}</span>
+    <time class="lc__date" datetime={d.date.toISOString()}>
+      {formatDate(d.date)}
+    </time>
+  </div>
+
+  <h3 class="lc__title">
+    <a href={url(`/lab/${entry.id}`)}>{d.title}</a>
+  </h3>
+
+  <p class="lc__excerpt">{d.excerpt}</p>
+
+  {
+    d.tags.length > 0 && (
+      <ul class="lc__tags">
+        {d.tags.map((t) => (
+          <li>{t}</li>
+        ))}
+      </ul>
+    )
+  }
+</article>
+
+<style>
+  .lc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding-top: var(--sp-4);
+    border-top: var(--line-heavy) solid var(--lc-accent, var(--c-pink));
+    height: 100%;
+  }
+
+  .lc[data-accent='pink'] {
+    --lc-accent: var(--c-pink);
+  }
+  .lc[data-accent='yellow'] {
+    --lc-accent: var(--c-yellow);
+  }
+  .lc[data-accent='cyan'] {
+    --lc-accent: var(--c-cyan);
+  }
+  .lc[data-accent='lime'] {
+    --lc-accent: var(--c-lime);
+  }
+  .lc[data-accent='ink'] {
+    --lc-accent: var(--c-ink);
+  }
+
+  .lc__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .lc__cat {
+    color: var(--accent);
+  }
+
+  .lc__date {
+    color: var(--fg-mute);
+  }
+
+  .lc__title {
+    font-size: var(--fs-h4);
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .lc__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .lc__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .lc:hover .lc__title {
+    color: var(--c-pink-deep);
+  }
+
+  .lc:has(a:focus-visible) {
+    outline: var(--line-thick) solid var(--c-pink-deep);
+    outline-offset: 6px;
+  }
+
+  .lc__title a:focus-visible {
+    outline: none;
+  }
+
+  .lc__excerpt {
+    font-size: var(--fs-small);
+    color: var(--fg-soft);
+  }
+
+  .lc__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-3);
+    margin-top: auto;
+    padding: var(--sp-3) 0 0;
+    list-style: none;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+
+  .lc__tags li + li::before {
+    content: '·';
+    margin-right: var(--sp-3);
+  }
+</style>

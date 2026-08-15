@@ -1,4 +1,4 @@
-# Build progress log
+﻿# Build progress log
 
 Working checkpoint file. If a session is interrupted, read this + `git log --oneline`
 to see exactly where the build stopped, then continue from the first unchecked milestone.
@@ -14,18 +14,18 @@ Never fabricate metrics, clients, or results.
 
 ## Milestones
 
-- [x] **M0** — Repo init, progress log, git baseline
-- [x] **M1** — Astro scaffold, `package.json`, `astro.config.mjs`, deps installed (astro 5.18.2)
-- [ ] **M2** — Design system: tokens, global CSS, type scale, fonts
-- [ ] **M3** — Base layout + core components (Nav, Footer, Button, Badge, SectionHeading)
-- [ ] **M4** — Content architecture: collection schemas + `src/data/*` files
-- [ ] **M5** — Content authoring: work case studies, lab, writing, services, experience, about
-- [ ] **M6** — Homepage
-- [ ] **M7** — Work index (filters) + case-study template
-- [ ] **M8** — Services, Lab, Writing, About, Contact, 404 pages
-- [ ] **M9** — SEO: meta, OG, sitemap, robots, favicon
-- [ ] **M10** — GitHub Pages workflow + README
-- [ ] **M11** — Build, responsive + a11y QA pass
+- [x] **M0** â€” Repo init, progress log, git baseline
+- [x] **M1** â€” Astro scaffold, `package.json`, `astro.config.mjs`, deps installed (astro 5.18.2)
+- [x] **M2** â€” Design system: tokens, global CSS, type scale, fonts
+- [x] **M3** â€” Base layout + core components (Nav, Footer, Button, Badge, SectionHeading)
+- [x] **M4** â€” Content architecture: collection schemas + `src/data/*` files
+- [x] **M5** â€” Content authoring: work case studies, lab, writing, services, experience, about
+- [x] **M6** â€” Homepage
+- [x] **M7** â€” Work index (filters) + case-study template
+- [ ] **M8** â€” Services, Lab, Writing, About, Contact, 404 pages
+- [ ] **M9** â€” SEO: meta, OG, sitemap, robots, favicon
+- [ ] **M10** â€” GitHub Pages workflow + README
+- [ ] **M11** â€” Build, responsive + a11y QA pass
 
 ---
 
@@ -46,8 +46,8 @@ Never fabricate metrics, clients, or results.
 
 Tracked here so the list survives a context loss. Final version goes in README.
 
-- [ ] Profile / casual photos → `public/images/`
-- [ ] Resume PDF → `public/ayushi-joshi-resume.pdf`
+- [ ] Profile / casual photos â†’ `public/images/`
+- [ ] Resume PDF â†’ `public/ayushi-joshi-resume.pdf`
 - [ ] GitHub username + repo name (sets `SITE` / `BASE` in `astro.config.mjs`)
 - [ ] LinkedIn + Upwork URLs, public email
 - [ ] Work screenshots / campaign creatives for case studies

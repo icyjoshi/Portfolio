@@ -1,0 +1,83 @@
+---
+/**
+ * The closing CTA. Appears near the end of most pages, above the
+ * footer, with copy that can change per page so the site doesn't
+ * repeat the same joke six times.
+ */
+import Button from './Button.astro';
+
+interface Props {
+  headline?: string;
+  line?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  note?: string;
+}
+
+const {
+  headline = 'Need a marketing brain?',
+  line = 'Brand, campaign, content or the awkward strategic question underneath all three — tell me what you are actually stuck on.',
+  ctaLabel = 'Work with me',
+  ctaHref = '/contact',
+  note,
+} = Astro.props;
+---
+
+<section class="cta" data-surface="paper-deep">
+  <div class="wrap cta__inner">
+    <div>
+      <h2 class="cta__headline">{headline}</h2>
+      <p class="cta__line">{line}</p>
+    </div>
+    <div class="cta__actions">
+      <Button href={ctaHref} variant="solid" size="lg">{ctaLabel}</Button>
+      {note && <p class="annot cta__note">{note}</p>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    border-block: var(--line-thick) solid var(--c-ink);
+    padding-block: var(--section-y-tight);
+  }
+
+  .cta__inner {
+    display: grid;
+    gap: var(--sp-6);
+    align-items: center;
+  }
+
+  .cta__headline {
+    font-size: var(--fs-h2);
+    line-height: 1.05;
+  }
+
+  .cta__line {
+    margin-top: var(--sp-4);
+    color: var(--fg-soft);
+    max-width: 48ch;
+  }
+
+  .cta__actions {
+    display: grid;
+    justify-items: start;
+    gap: var(--sp-4);
+  }
+
+  .cta__note {
+    max-width: 30ch;
+  }
+
+  @media (min-width: 56rem) {
+    .cta__inner {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: var(--sp-9);
+    }
+
+    .cta__actions {
+      justify-items: end;
+      text-align: right;
+    }
+  }
+</style>
