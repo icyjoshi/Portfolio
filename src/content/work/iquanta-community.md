@@ -73,6 +73,8 @@ early in preparation asked about *feasibility* — can someone like me do
 this. People mid-preparation asked about *method*. People near the end
 asked about *comparison*.
 
+Very few of those questions were really requests for information. Most
+were requests for reassurance wearing an information question's clothing.
 
 ## 04 — The insight
 
@@ -106,7 +108,7 @@ underneath it.
 - Audience analysis of the MBA-aspirant segment, drawn from what people
   were actually asking
 - Query handling and routing across a team of 5 interns
-- Lead qualification and conversion on the queries that warranted it.
+- Lead qualification and conversion on the queries that warranted it
 
 ## 07 — The result
 
