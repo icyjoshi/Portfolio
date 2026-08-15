@@ -14,7 +14,9 @@ import Button from '@components/Button.astro';
 import CtaBand from '@components/CtaBand.astro';
 import { about } from '@data/about';
 import { site, education, certifications } from '@data/site';
-import { url } from '@lib/url';
+import { publicFileExists } from '@lib/assets';
+
+const hasResume = publicFileExists(site.resume);
 ---
 
 <BaseLayout
@@ -27,9 +29,15 @@ import { url } from '@lib/url';
       <p class="label label--accent">About</p>
       <h1 class="page-head__title">{about.headline}</h1>
       <p class="lead page-head__lead">{about.standfirst}</p>
-      <div class="page-head__actions">
-        <Button href={site.resume} variant="ghost">View résumé (PDF)</Button>
-      </div>
+      {
+        hasResume && (
+          <div class="page-head__actions">
+            <Button href={site.resume} variant="ghost">
+              View résumé (PDF)
+            </Button>
+          </div>
+        )
+      }
     </div>
   </section>
 

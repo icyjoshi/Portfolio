@@ -19,8 +19,10 @@ import CtaBand from '@components/CtaBand.astro';
 import { getFeaturedWork } from '@lib/content';
 import { site } from '@data/site';
 import { url } from '@lib/url';
+import { publicFileExists } from '@lib/assets';
 
 const featured = await getFeaturedWork(4);
+const hasResume = publicFileExists(site.resume);
 
 /* The chain the whole site is organised around. */
 const chain = [
@@ -77,10 +79,18 @@ const chain = [
               <dt>Done</dt>
               <dd>2+ years across brand, content, campaigns, community &amp; analytics</dd>
             </div>
-            <div>
-              <dt>Also</dt>
-              <dd><a class="link" href={url(site.resume)}>Résumé (PDF)</a></dd>
-            </div>
+            {
+              hasResume && (
+                <div>
+                  <dt>Also</dt>
+                  <dd>
+                    <a class="link" href={url(site.resume)}>
+                      Résumé (PDF)
+                    </a>
+                  </dd>
+                </div>
+              )
+            }
           </dl>
         </aside>
       </div>

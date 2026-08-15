@@ -13,8 +13,10 @@ import RailSection from '@components/RailSection.astro';
 import SectionHeading from '@components/SectionHeading.astro';
 import { site } from '@data/site';
 import { url } from '@lib/url';
+import { publicFileExists } from '@lib/assets';
 
 const socials = site.socials.filter((s) => s.href !== '#');
+const hasResume = publicFileExists(site.resume);
 
 const briefHelp = [
   'What you are selling, and to whom',
@@ -60,7 +62,15 @@ const briefHelp = [
             </li>
           ))
         }
-        <li><a class="link" href={url(site.resume)}>Résumé (PDF)</a></li>
+        {
+          hasResume && (
+            <li>
+              <a class="link" href={url(site.resume)}>
+                Résumé (PDF)
+              </a>
+            </li>
+          )
+        }
       </ul>
     </div>
   </section>

@@ -5,12 +5,14 @@
  */
 import { site, footer } from '@data/site';
 import { url } from '@lib/url';
+import { publicFileExists } from '@lib/assets';
 import Button from './Button.astro';
 
 /* Socials still set to '#' are unfinished placeholders — hide them
    rather than shipping dead links. */
 const socials = site.socials.filter((s) => s.href !== '#');
 const hiddenSocials = site.socials.filter((s) => s.href === '#');
+const hasResume = publicFileExists(site.resume);
 ---
 
 <footer class="foot" data-surface="ink">
@@ -63,16 +65,27 @@ const hiddenSocials = site.socials.filter((s) => s.href === '#');
                 </li>
               ))
             }
-            <li>
-              <a class="link-wipe" href={url(site.resume)}>Résumé (PDF)</a>
-            </li>
+            {
+              hasResume && (
+                <li>
+                  <a class="link-wipe" href={url(site.resume)}>
+                    Résumé (PDF)
+                  </a>
+                </li>
+              )
+            }
           </ul>
           {
             /* Dev-only nudge so placeholders never quietly ship */
-            import.meta.env.DEV && hiddenSocials.length > 0 && (
+            import.meta.env.DEV &&
+            (hiddenSocials.length > 0 || !hasResume) && (
               <p class="foot__todo">
-                Hidden until set: {hiddenSocials.map((s) => s.label).join(', ')} —
-                see src/data/site.ts
+                Hidden until you add them:{' '}
+                {[
+                  ...hiddenSocials.map((s) => s.label),
+                  ...(hasResume ? [] : ['Résumé PDF']),
+                ].join(', ')}{' '}
+                — see src/data/site.ts and README
               </p>
             )
           }

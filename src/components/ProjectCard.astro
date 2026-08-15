@@ -40,6 +40,7 @@ const isLive = d.status === 'published';
       src={d.thumbnail}
       alt={d.heroImageAlt ?? ''}
       title={d.title}
+      org={d.org}
       accent={d.accent}
       type={d.type}
       ratio={layout === 'feature' ? '4 / 3' : '16 / 9'}

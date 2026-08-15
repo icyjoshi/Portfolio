@@ -17,6 +17,8 @@ interface Props {
   src?: string;
   alt?: string;
   title: string;
+  /** Preferred wordmark for the plate — the client or project name. */
+  org?: string;
   accent: 'pink' | 'yellow' | 'cyan' | 'lime' | 'ink';
   type: string;
   /** Aspect ratio of the slot. */
@@ -28,20 +30,20 @@ const {
   src,
   alt = '',
   title,
+  org,
   accent,
   type,
   ratio = '4 / 3',
   eager = false,
 } = Astro.props;
 
-/* Initials from the project title — up to three letters. */
-const initials = title
-  .replace(/[^\p{L}\p{N} ]/gu, '')
-  .split(/\s+/)
-  .filter((w) => w.length > 2 || /^\d/.test(w))
-  .slice(0, 3)
-  .map((w) => w[0]?.toUpperCase() ?? '')
-  .join('');
+/* The plate is a title card, so it needs a real name on it — the
+   client for professional work, the project name otherwise. Initials
+   were tried and read as noise ("LAN", "MEB"). */
+const wordmark = (org ?? title).trim();
+
+/* Long titles get a smaller setting so they still fit the plate. */
+const size = wordmark.length > 28 ? 'sm' : wordmark.length > 16 ? 'md' : 'lg';
 ---
 
 <div class="pv" data-accent={accent} style={`--ratio:${ratio}`}>
@@ -54,8 +56,8 @@ const initials = title
         decoding="async"
       />
     ) : (
-      <div class="pv__plate" aria-hidden="true">
-        <span class="pv__initials">{initials || '—'}</span>
+      <div class="pv__plate" data-size={size} aria-hidden="true">
+        <span class="pv__wordmark">{wordmark}</span>
         <span class="pv__type">{TYPE_LABEL_SHORT[type] ?? type}</span>
         <span class="pv__rules" />
       </div>
@@ -87,7 +89,9 @@ const initials = title
     position: absolute;
     inset: 0;
     display: grid;
-    place-items: center;
+    align-content: center;
+    padding: clamp(1rem, 7cqi, 3rem);
+    padding-bottom: clamp(2.75rem, 14cqi, 4rem);
     overflow: hidden;
     background: var(--plate-bg, var(--c-paper-deep));
     color: var(--plate-fg, var(--c-ink));
@@ -118,15 +122,29 @@ const initials = title
     --plate-fg: var(--c-paper);
   }
 
-  .pv__initials {
+  /* The wordmark is set like a title card: display face, tight,
+     wrapping naturally. Size steps down for longer names so a
+     four-word project title still fits the plate. */
+  .pv__wordmark {
     font-family: var(--ff-display);
     font-variation-settings: var(--wonk-on);
     font-weight: 700;
-    font-size: clamp(3.5rem, 14cqi, 8rem);
-    line-height: 1;
-    letter-spacing: -0.05em;
-    opacity: 0.92;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
     user-select: none;
+  }
+
+  .pv__plate[data-size='lg'] .pv__wordmark {
+    font-size: clamp(1.75rem, 13cqi, 5rem);
+  }
+
+  .pv__plate[data-size='md'] .pv__wordmark {
+    font-size: clamp(1.5rem, 10cqi, 3.75rem);
+  }
+
+  .pv__plate[data-size='sm'] .pv__wordmark {
+    font-size: clamp(1.25rem, 7.5cqi, 2.75rem);
   }
 
   .pv__type {

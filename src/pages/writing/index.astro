@@ -6,6 +6,7 @@
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 import RailSection from '@components/RailSection.astro';
+import SectionHeading from '@components/SectionHeading.astro';
 import WritingCard from '@components/WritingCard.astro';
 import EmptyState from '@components/EmptyState.astro';
 import CtaBand from '@components/CtaBand.astro';
@@ -30,6 +31,10 @@ const pieces = await getWriting();
   </section>
 
   <RailSection num="01" note="Published here and elsewhere." ruled>
+    {/* Gives the page an h2 between the h1 and the h3 on each card,
+        so the heading outline stays in order for screen readers. */}
+    <SectionHeading title="Newest first" />
+
     {
       pieces.length > 0 ? (
         <div class="writing-list">
