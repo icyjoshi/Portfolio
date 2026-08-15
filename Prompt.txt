@@ -1,0 +1,2462 @@
+# BUILD AYSUHI JOSHI'S PERSONAL MARKETING PORTFOLIO FROM SCRATCH
+
+You are an expert **creative director, UX/UI designer, brand strategist, portfolio designer, frontend engineer, and information architect**.
+
+I want you to build my personal portfolio website from scratch.
+
+This is NOT a generic developer portfolio.
+This is NOT a resume website with pretty CSS.
+This is NOT an "AI-generated creative portfolio."
+This is NOT a template.
+
+This is a living, evolving **personal marketing portfolio and freelance acquisition website** for an early-career multidisciplinary marketer.
+
+The website will be hosted on **GitHub Pages / GitHub.io**.
+
+The most important objective is:
+
+> When a recruiter sees this website, I want them to think:
+>
+> **"She's creative, but she actually understands marketing. I want to interview her. She could actually work with our clients."**
+
+And when a potential freelance client sees it, I want them to think:
+
+> **"She can understand my brand, think strategically, make things, and actually help me move the marketing forward."**
+
+---
+
+# 1. WHO IS AYUSHI?
+
+My name is **Ayushi Joshi**.
+
+I am currently pursuing an MBA in Marketing and have 2+ years of experience across digital marketing, content, social media, campaigns, market research and marketing analytics.
+
+But I do NOT want to be positioned simply as:
+
+* a social media manager
+* a reel creator
+* a content writer
+* an SEO writer
+* a Canva designer
+* a "digital marketer"
+* someone who just executes briefs
+
+Those are components of my experience, not the complete picture.
+
+## My actual professional ambition
+
+I want to become the kind of marketer who can sit in a room with a brand team and contribute to almost every part of a marketing problem.
+
+I want to be able to discuss:
+
+* Who is the target audience?
+* What do they actually care about?
+* What would they think about this product?
+* Is the positioning right?
+* What should the brand look and feel like?
+* What should the campaign idea be?
+* What's the punchy line?
+* What should the content say?
+* Which channel makes sense?
+* What does the data tell us?
+* Where are we losing people?
+* What should we test next?
+* How can AI accelerate the work without replacing human judgement?
+* How can creativity and analytics work together?
+
+I want to be perceived as a **multidisciplinary, 360-degree marketer**.
+
+I do NOT care about forcing myself into a perfectly precise job title because titles like "Creative Strategist", "Brand Strategist", "Content Strategist", "Creative Marketer", etc. overlap heavily.
+
+The website should communicate the **intersection of these capabilities**, rather than obsess over one title.
+
+---
+
+# 2. MY PERSONAL MARKETING PHILOSOPHY
+
+A major part of my personality is:
+
+> A hyperactive creative brain + curiosity about almost everything + an interest in numbers and analytics + the desire to make something so good that someone says "wow, this is new" AND "I thought about this too but could never express it."
+
+I am naturally curious.
+
+I like connecting unrelated ideas.
+
+I like understanding people.
+
+I like words.
+
+I like visuals.
+
+I like campaigns.
+
+I like numbers when they actually help make decisions.
+
+I like technology.
+
+I am particularly interested in AI and how it can amplify human creativity and marketing thinking.
+
+I want to be the person who can move between these worlds instead of staying trapped in one specialist box.
+
+The website should communicate:
+
+**creativity + strategic thinking + curiosity + analytical thinking + technology + taste.**
+
+---
+
+# 3. IMPORTANT: DO NOT OVERPOSITION ME
+
+Do NOT make the hero say something generic like:
+
+> "Creative Marketing Strategist helping brands unlock their potential."
+
+Absolutely avoid:
+
+* unlock
+* empower
+* elevate
+* transform
+* amplify
+* innovative solutions
+* results-driven
+* passionate marketer
+* dynamic professional
+* strategic thinker
+* growth-oriented
+* disruptive
+* synergise
+* storytelling that resonates
+
+unless absolutely necessary.
+
+These words are overused and make young marketer portfolios sound like LinkedIn AI sludge.
+
+My personality is more observant, witty, curious, slightly chaotic and self-aware.
+
+The copy should sound like a **smart human who knows marketing**, not a marketing agency trying to sound smart.
+
+---
+
+# 4. THE PERSONALITY
+
+I describe myself as:
+
+* goofy
+* sarcastic
+* curious
+* chronically online
+* bookish
+* slightly chaotic
+* ambitious
+* observant
+* opinionated
+* creative
+* analytical
+* curious about everything
+
+My humour is dry / self-aware rather than loud.
+
+Examples of phrases I genuinely say:
+
+> "Unfortunately, I noticed the marketing."
+
+> "This seemed like a good idea at 2 AM."
+
+I genuinely have ideas that seem brilliant at 2 AM and then look suspiciously generic once I post them.
+
+Another thought I genuinely have:
+
+> "People did it before generative AI, what's stopping them from putting some colours in their carousels and giving them a little life now?"
+
+Use this personality carefully.
+
+The website should NOT become a comedy website.
+
+The humour should appear in:
+
+* microcopy
+* section labels
+* hover states
+* small annotations
+* loading messages
+* occasional CTAs
+* project descriptions
+* the Lab
+
+The core portfolio must remain highly professional.
+
+---
+
+# 5. THE IDEAL PERSONALITY RATIO
+
+Aim approximately for:
+
+**65% professional**
+**35% quirky / personal**
+
+Some sections can be more serious.
+
+For example:
+
+### HERO
+
+Professional + personality
+
+### CASE STUDIES
+
+80% professional / 20% personality
+
+### SERVICES
+
+Professional
+
+### ABOUT
+
+50/50
+
+### LAB
+
+More playful
+
+### MICROCOPY
+
+Very Ayushi
+
+### CONTACT
+
+Professional with a little personality
+
+Never sacrifice clarity for quirkiness.
+
+---
+
+# 6. THE CORE BRAND IDEA
+
+The website should communicate this concept:
+
+> **I notice things, connect the dots, and make something out of them.**
+
+I am interested in the whole chain:
+
+**Audience → Insight → Idea → Words → Visual → Campaign → Channel → Data → Optimisation**
+
+The website should make this multidisciplinarity feel like a strength rather than a lack of specialisation.
+
+Do NOT present me as:
+
+> "Jack of all trades, master of none"
+
+even though that is how I personally describe the ambition.
+
+Instead, communicate:
+
+> **I connect the pieces.**
+
+---
+
+# 7. DESIGN REFERENCES
+
+Use the following as strategic references, NOT as templates to copy:
+
+## Sarah Hunt
+
+Reference for:
+
+* editorial feel
+* creative professionalism
+* services architecture
+* portfolio storytelling
+* copywriting positioning
+* personality without childishness
+
+## Erika Fitzgerald
+
+Reference for:
+
+* case study depth
+* strategic storytelling
+* copy + creative presentation
+* showing thinking behind the work
+* professional credibility
+* results / proof
+
+Do NOT copy either site's visual identity, layout or code.
+
+Use the principles only.
+
+The resulting website must feel original and unmistakably like Ayushi.
+
+---
+
+# 8. VISUAL DIRECTION
+
+I want:
+
+**professional × editorial × colourful × quirky × intelligent × slightly weird**
+
+Think:
+
+* editorial magazine
+* old newspaper
+* scrapbook
+* Polaroid
+* carefully maintained Instagram grid
+* creative studio
+* personal notebook
+* marketing strategy deck
+* modern portfolio
+
+BUT combine them subtly.
+
+I do NOT want the site to look like a scrapbook made in Canva.
+
+It should feel designed by someone with taste.
+
+---
+
+# 9. THINGS I LOVE VISUALLY
+
+I like:
+
+* beaches
+* old newspapers
+* books
+* Polaroids
+* editorial layouts
+* carefully maintained Instagram grids
+* photography
+* colour
+* strong typography
+* handwritten annotations
+* intentional imperfections
+* collage-like compositions
+* visual storytelling
+
+I like colour, but I don't want 15 colours fighting for attention.
+
+---
+
+# 10. THINGS I HATE VISUALLY
+
+Absolutely avoid:
+
+* generic AI illustrations
+* AI-generated people
+* 3D blob illustrations
+* glassmorphism
+* excessive gradient mesh
+* beige + black "minimalist creative" aesthetic
+* corporate blue
+* generic SaaS design
+* excessive rounded cards
+* every section inside a card
+* random floating shapes
+* meaningless animations
+* overuse of shadows
+* excessive neon
+* excessive pastel
+* stock photography
+* fake handwritten fonts everywhere
+* childish stickers everywhere
+* "creative portfolio" clichés
+* giant meaningless words
+* visual clutter
+* excessive motion
+
+Important:
+
+> There is a thin line between a website having character and a website looking like Claude generated every element.
+
+Stay on the correct side of that line.
+
+---
+
+# 11. COLOUR THEORY
+
+The website should use a controlled, intentional palette.
+
+Do NOT simply throw bright colours everywhere.
+
+The palette should have:
+
+### PRIMARY DARK
+
+Deep ink / navy-plum.
+
+Suggested starting point:
+
+`#17152B`
+
+Purpose:
+
+* major dark backgrounds
+* footer
+* high-contrast sections
+* serious / strategic moments
+
+### PRIMARY LIGHT
+
+Warm paper / ivory.
+
+Suggested:
+
+`#F7F1E7`
+
+Purpose:
+
+* main background
+* editorial content
+* reading-heavy sections
+
+### BRAND ACCENT
+
+Hot editorial pink.
+
+Suggested:
+
+`#F04A8A`
+
+Purpose:
+
+* key accents
+* links
+* selected highlights
+* important visual details
+
+### SECONDARY ACCENT
+
+Warm yellow.
+
+Suggested:
+
+`#F6C945`
+
+Purpose:
+
+* CTA buttons
+* important highlights
+* positive emphasis
+
+### OPTIONAL COOL ACCENT
+
+Muted cyan/blue.
+
+Suggested:
+
+`#5CC8D7`
+
+Use VERY sparingly.
+
+### OPTIONAL GREEN
+
+Muted lime / chartreuse.
+
+Use only occasionally for tags or small visual moments.
+
+---
+
+# 12. COLOUR RULE
+
+The colour system should follow roughly:
+
+**60% light / paper**
+**25% dark**
+**10% pink**
+**5% other accents**
+
+The accents should create hierarchy, not noise.
+
+Do not use every accent colour in every section.
+
+A section should normally have:
+
+* one dominant background
+* one primary text colour
+* one accent
+* optional secondary accent
+
+Colour should communicate meaning.
+
+For example:
+
+Pink = personality / brand
+
+Yellow = action / CTA
+
+Dark = authority / strategy
+
+Paper = editorial / reading
+
+---
+
+# 13. TYPOGRAPHY
+
+Typography should be one of the strongest elements of the website.
+
+Use a combination of:
+
+### DISPLAY FONT
+
+A distinctive editorial / grotesk / slightly quirky display typeface.
+
+### BODY FONT
+
+Highly readable modern sans-serif.
+
+### OPTIONAL ACCENT
+
+A restrained handwritten / monospace style for tiny annotations only.
+
+Do NOT use:
+
+* Comic Sans
+* overly childish fonts
+* 5 different fonts
+* fake handwritten fonts for paragraphs
+
+Typography hierarchy should be extremely clear:
+
+# H1
+
+Huge, expressive, memorable.
+
+## H2
+
+Strong section titles.
+
+### H3
+
+Project titles.
+
+Body
+Highly readable.
+
+Small label
+Uppercase / monospace / editorial annotation.
+
+Use generous line-height.
+
+The site must remain readable on mobile.
+
+---
+
+# 14. LAYOUT PHILOSOPHY
+
+Do NOT make every section a collection of cards.
+
+Use:
+
+* full-width editorial sections
+* asymmetrical grids
+* large typography
+* image-led sections
+* text + image compositions
+* occasional overlapping elements
+* horizontal rules
+* small annotations
+* numbered sections
+* whitespace
+
+Use cards only when they genuinely help information hierarchy.
+
+The website should feel like a **designed editorial document**, not a SaaS dashboard.
+
+---
+
+# 15. NAVIGATION
+
+Primary navigation:
+
+**WORK**
+**SERVICES**
+**LAB**
+**ABOUT**
+**WRITING**
+**CONTACT**
+
+Have a persistent CTA:
+
+**WORK WITH ME**
+
+or similar.
+
+Keep navigation simple.
+
+On mobile use a clean menu.
+
+Do not make the navigation overly animated.
+
+---
+
+# 16. HOMEPAGE INFORMATION ARCHITECTURE
+
+The homepage should tell a story.
+
+Recommended structure:
+
+## SECTION 01 — HERO
+
+Large name / personality.
+
+Possible direction:
+
+> **I notice things.
+> Then I make something out of them.**
+
+Subheading:
+
+> A multidisciplinary marketer interested in what happens when audience insight, creative thinking, analytics and AI collide.
+
+Do not lock this exact wording if a stronger version emerges from the design.
+
+CTA:
+
+**SEE THE WORK**
+
+Secondary:
+
+**WORK WITH ME**
+
+Then immediately show proof.
+
+---
+
+# 17. PROOF STRIP
+
+Use real metrics from my experience.
+
+Potential metrics include:
+
+### 378K+
+
+community members managed
+
+### 400%
+
+weekly active user growth
+
+### 78%
+
+lead conversion
+
+### 2×
+
+views on a launch campaign
+
+These numbers must NEVER appear as decorative vanity metrics.
+
+Attach context wherever possible.
+
+Example:
+
+**400%**
+WAU growth
+*Cogent University*
+
+**78%**
+lead conversion
+*91 / 117 user queries*
+*iQuanta*
+
+Do not invent metrics.
+
+Do not change numbers.
+
+Do not create fake statistics.
+
+---
+
+# 18. SECTION — "WHAT I DO"
+
+Do NOT create a boring Skills section.
+
+Instead, create a visually interesting capabilities section.
+
+Potential categories:
+
+### BRAND
+
+Positioning
+Audience
+Messaging
+Brand thinking
+
+### CAMPAIGNS
+
+Big ideas
+Campaign concepts
+Creative direction
+Launches
+
+### CONTENT
+
+SEO
+Social
+Editorial
+Storytelling
+
+### GROWTH
+
+Analytics
+Funnels
+Optimisation
+Performance thinking
+
+### TECHNOLOGY
+
+AI workflows
+Research
+Automation
+Emerging tools
+
+Each capability should eventually link to proof / relevant projects.
+
+The purpose is:
+
+> Don't tell me you're good at something. Show me where you used it.
+
+---
+
+# 19. SECTION — SELECTED WORK
+
+This should be one of the most visually impressive sections.
+
+Do NOT display everything.
+
+Show 3–5 strongest pieces.
+
+Every project card should contain:
+
+* project name
+* one-line description
+* project type
+* industry
+* capabilities
+* visual
+* status
+
+Use labels:
+
+**PROFESSIONAL WORK**
+
+**INDEPENDENT PROJECT**
+
+**SPECULATIVE PROJECT**
+
+**PERSONAL EXPERIMENT**
+
+This distinction must always be clear.
+
+Never imply that speculative work was commissioned by a real brand.
+
+---
+
+# 20. WORK PAGE
+
+The Work page should function as a portfolio library.
+
+Organise work into:
+
+## PROFESSIONAL WORK
+
+Real industry experience.
+
+## INDEPENDENT PROJECTS
+
+Self-initiated strategic projects.
+
+## SPEC WORK
+
+Hypothetical / speculative campaigns.
+
+## EXPERIMENTS
+
+Smaller tests, ideas and observations.
+
+Allow filtering by:
+
+* type
+* industry
+* B2B
+* B2C
+* D2C
+* capability
+
+But don't over-engineer the filters.
+
+They should feel useful, not like a database interface.
+
+---
+
+# 21. CASE STUDY SYSTEM
+
+Every major project must use a reusable case-study template.
+
+This is VERY important because I want the website to remain sustainable.
+
+Every case study should follow:
+
+## HERO
+
+Project title
+
+One-line description
+
+Industry
+
+Business model
+
+My role
+
+Project type
+
+---
+
+## 01 — THE BRIEF
+
+What was the problem?
+
+---
+
+## 02 — THE CONTEXT
+
+Audience
+Market
+Situation
+
+---
+
+## 03 — THE OBSERVATION
+
+What did I notice?
+
+---
+
+## 04 — THE INSIGHT
+
+What does that observation actually mean?
+
+---
+
+## 05 — THE STRATEGY
+
+What did I decide?
+
+Why?
+
+---
+
+## 06 — THE WORK
+
+Show the actual output.
+
+Images
+Videos
+Copy
+Campaigns
+Screenshots
+Strategy documents
+
+---
+
+## 07 — THE RESULT
+
+For real work:
+
+Actual metrics.
+
+For speculative work:
+
+DO NOT fabricate results.
+
+Instead show:
+
+**WHAT I WOULD MEASURE**
+
+Potential KPIs
+Hypotheses
+Testing framework
+
+---
+
+## 08 — WHAT I LEARNED
+
+What changed in my thinking?
+
+---
+
+## 09 — TL;DR
+
+Three quick points:
+
+**Problem**
+
+**Approach**
+
+**Impact / intended outcome**
+
+---
+
+# 22. CASE STUDY PRINCIPLE
+
+Every project must follow:
+
+> **OBSERVE → INTERPRET → RECOMMEND → CREATE**
+
+Never:
+
+> RESEARCH → SWOT → SUMMARISE
+
+I do NOT want MBA assignment-style case studies.
+
+Avoid:
+
+* generic SWOT
+* generic 4Ps
+* generic STP
+* company history
+* Wikipedia-style summaries
+* obvious competitor descriptions
+
+Unless the information is genuinely relevant to a strategic recommendation.
+
+The question should always be:
+
+> **"What did Ayushi think about this problem?"**
+
+---
+
+# 23. MY SIX PERSONAL PROJECTS
+
+These will be developed over time.
+
+The website MUST support adding them incrementally.
+
+Do NOT require all six to exist before the site feels complete.
+
+---
+
+## PROJECT 01 — BRAND OBSERVATORY
+
+A cross-industry marketing intelligence project.
+
+Concept:
+
+4 industries × 3 business models:
+
+B2B
+B2C
+D2C
+
+Potential industries:
+
+* travel
+* lifestyle
+* fashion
+* entertainment
+
+The final brand list will be decided later.
+
+The study should compare brands through:
+
+* positioning
+* audience
+* value proposition
+* brand voice
+* content
+* acquisition
+* conversion
+* retention
+* competitive advantage
+* marketing gaps
+* strategic opportunities
+
+But this must NOT become a boring research report.
+
+The core framework should be:
+
+**OBSERVE → INTERPRET → RECOMMEND**
+
+The output should be editorial and visual.
+
+---
+
+## PROJECT 02 — THE BIG IDEA
+
+A complete 360° independent brand-building project.
+
+Build one brand from:
+
+research
+→ audience
+→ insight
+→ positioning
+→ value proposition
+→ brand voice
+→ visual direction
+→ campaign
+→ content
+→ acquisition
+→ paid media concept
+→ landing page
+→ email
+→ retention
+
+This should become the portfolio's flagship strategic project.
+
+---
+
+## PROJECT 03 — THE CAMPAIGN ROOM
+
+A campaign strategy / advertising project.
+
+Build campaigns across:
+
+B2B
+B2C
+D2C
+
+Show:
+
+brief
+→ audience
+→ insight
+→ big idea
+→ creative platform
+→ copy
+→ creative direction
+→ channel strategy
+→ funnel
+→ KPI framework
+
+---
+
+## PROJECT 04 — I HAVE THOUGHTS
+
+A personal brand / campaign analysis series.
+
+Short, opinionated analyses of existing brands.
+
+Format:
+
+**What I noticed**
+
+**Why it matters**
+
+**What I would do**
+
+**What I'd test**
+
+These should be quick, visual and highly readable.
+
+---
+
+## PROJECT 05 — COPY THAT
+
+A copy and messaging laboratory.
+
+Potential exercises:
+
+* landing page rewrite
+* ad copy
+* campaign tagline
+* brand voice makeover
+* product positioning
+* email
+* social copy
+
+Always show:
+
+**Before**
+
+**After**
+
+**Why**
+
+---
+
+## PROJECT 06 — THE FUNNEL
+
+A performance / acquisition / analytics project.
+
+Show:
+
+Ad
+→ landing page
+→ conversion
+→ email
+→ retention
+
+Include:
+
+* audience
+* funnel
+* hypotheses
+* creative variants
+* CTA
+* measurement
+* A/B testing ideas
+* KPIs
+
+I currently have theoretical knowledge of Google and Meta Ads but not substantial hands-on paid media experience.
+
+Therefore:
+
+**NEVER present me as an experienced paid media specialist.**
+
+Present it as:
+
+> **Developing / learning / experimental performance marketing capability.**
+
+As I gain real experience, the website can be updated.
+
+---
+
+# 24. "CURRENTLY IN THE LAB"
+
+This section is crucial.
+
+It prevents the website from ever becoming "finished."
+
+Show projects in progress.
+
+Example:
+
+**CURRENTLY IN THE LAB**
+
+🧪 Brand Observatory
+12 brands × 4 industries × 3 business models
+
+🧪 The Big Idea
+Building a brand from scratch
+
+🧪 Campaign Room
+Testing campaign ideas across B2B / B2C / D2C
+
+Use a subtle playful microcopy line such as:
+
+> "Currently making a thing. Come back when it's less embarrassing."
+
+But don't overdo this.
+
+As projects are completed, they move automatically into Work.
+
+---
+
+# 25. THE LAB
+
+Create a permanent page called:
+
+**THE LAB**
+
+This is where I can publish small ideas without needing to create a full case study.
+
+Examples:
+
+### BRAND BREAKDOWN
+
+Why this brand works.
+
+### COPY EXPERIMENT
+
+I rewrote this landing page.
+
+### CAMPAIGN IDEA
+
+What I'd do with this brand.
+
+### AD TEST
+
+Three hooks I'd test.
+
+### FUNNEL BREAKDOWN
+
+Where I think this funnel loses people.
+
+### MARKETING OBSERVATION
+
+Something interesting I noticed.
+
+These can be 300–600 word posts or highly visual mini-projects.
+
+The Lab is intentionally lower-friction than full case studies.
+
+---
+
+# 26. WRITING
+
+Create a Writing section.
+
+Potential content:
+
+* published articles
+* marketing observations
+* campaign thinking
+* brand breakdowns
+* LinkedIn writing
+* editorial work
+* essays about marketing
+
+This section should feel like an editorial publication.
+
+Not a blog dashboard.
+
+---
+
+# 27. ABOUT PAGE
+
+The About page should NOT simply repeat my resume.
+
+It should answer:
+
+> Who is Ayushi?
+
+> How does she think?
+
+> Why marketing?
+
+> What is she interested in?
+
+> Where is she heading?
+
+Include:
+
+* MBA Marketing
+* BBA Finance
+* career evolution
+* interest in creativity + analytics
+* interest in AI
+* love for books
+* community / storytelling
+* current direction
+
+Keep the resume-like facts secondary.
+
+---
+
+# 28. EXPERIENCE
+
+Include a concise professional timeline.
+
+Use these REAL experiences and facts from my resume.
+
+## Jagroots Brand Solutions
+
+Marketing Intern
+Jun 2026 – Jul 2026
+
+Relevant work:
+
+* market research
+* competitive analysis
+* pricing / distribution / packaging research
+* brand launch / GTM
+* location-based social networking app launch
+* content direction
+* reel scripts
+* launch campaign
+* 2× previous-content views
+* offline outreach
+* multi-client content planning
+* website structure and content architecture
+* SEO/GEO
+* 3× traffic after relaunch
+
+---
+
+## Freelance Marketing & Content Associate
+
+Nov 2025 – Apr 2026
+
+* 30+ long-form B2B blogs
+* SEO
+* keyword research
+* AI-assisted content workflows
+* Wix
+* 60+ social posts
+* platform-specific copy
+* hooks
+* CTAs
+* social storytelling
+* SaaS / enterprise narratives
+* positioning
+* value propositions
+* buyer personas
+* benefit-led copy
+* SERP analysis
+* keyword difficulty
+* search volume
+
+---
+
+## Cogent Infotech
+
+Content Writer – Marketing
+Dec 2024 – Jul 2025
+
+* B2B content
+* AI
+* cybersecurity
+* upskilling
+* digital transformation
+* SEO
+* email
+* newsletters
+* infographics
+* social
+* 400% WAU growth
+* campaign execution
+* funnel optimisation
+* Women's Day
+* Black History Month
+* Mental Health Month
+* meme marketing
+* polls
+* Career Rizz 101
+* Google Analytics
+* performance data
+
+---
+
+## AISECT India
+
+Social Media Strategist
+May 2024 – Nov 2024
+
+* 7 social media campaigns
+* Instagram / Facebook
+* content calendars
+* campaign copy
+* Canva creative concepts
+* creative team coordination
+* performance monitoring
+* 400+ follower growth
+
+---
+
+## Value Founders
+
+Marketing Intern
+Oct 2023 – Nov 2023
+
+* primary research
+* Smile Train
+* KoboToolbox
+* geographic mapping
+* Excel
+* SOP development
+* process documentation
+
+---
+
+## iQuanta
+
+Community Management & Digital Marketing Intern
+Apr 2023 – May 2024
+
+* 378K+ member Facebook community
+* community marketing
+* interactive content
+* MBA audience
+* audience analysis
+* team of 5 interns
+* 18,000+ user queries
+* 78% conversion rate
+
+These facts come from my resume.
+
+Do NOT invent anything beyond them.
+
+---
+
+# 29. PROFESSIONAL EXPERIENCE SHOULD NOT DOMINATE
+
+Experience is proof.
+
+It is NOT the whole portfolio.
+
+The portfolio should make it possible to understand my experience quickly and then explore the work behind it.
+
+Where actual work samples are available, connect the experience entry to those pieces.
+
+---
+
+# 30. SERVICES PAGE
+
+This is essential because I also want a freelance career.
+
+Do NOT make this sound like an agency.
+
+The services should reflect my actual strengths and desired direction.
+
+Priority:
+
+### TIER 1 — MOST DESIRABLE
+
+* Brand strategy
+* Campaign strategy
+* Creative strategy
+* SEO content
+* Landing page copy
+
+### TIER 2
+
+* Community management
+* Marketing research
+* Competitor analysis
+* Marketing audits
+
+### TIER 3
+
+* Social media strategy
+* Social media content
+* Content strategy
+* Email marketing
+
+### TIER 4 — DEVELOPING
+
+* Google Ads
+* Meta Ads
+
+These should be explicitly presented as developing / emerging capabilities until I have hands-on experience.
+
+### LOW PRIORITY
+
+* Generic blog writing
+
+Do not market me primarily as a blog writer.
+
+---
+
+# 31. SERVICES SHOULD BE PROOF-BASED
+
+Every service should eventually link to relevant proof.
+
+Example:
+
+### BRAND STRATEGY
+
+Relevant work:
+
+* Jagroots brand launch research
+* Brand Observatory
+* The Big Idea
+
+### CAMPAIGN STRATEGY
+
+Relevant work:
+
+* Cogent campaigns
+* Campaign Room
+* AISECT campaigns
+
+### COPY
+
+Relevant work:
+
+* Cogent
+* Freelance work
+* Copy That
+
+This architecture should be built into the site.
+
+---
+
+# 32. FREELANCE CLIENT POSITIONING
+
+I don't yet have one precise ideal client profile.
+
+But I know I want to work with **product/brand-side companies** and eventually have an agency-side full-time career.
+
+I want a foothold on both sides of the product.
+
+The freelance side should therefore appeal to:
+
+* brands
+* startups
+* product companies
+* agencies
+* marketing teams
+* founders with real products
+
+Do not make the website look like I only work with:
+
+* influencers
+* coaches
+* personal brands
+* small social media clients
+
+I want to move toward serious brand and marketing work.
+
+---
+
+# 33. WORK WITH ME CTA
+
+Use a clear CTA throughout the site.
+
+Potential language:
+
+**Need a marketing brain?**
+
+**Have a brief? Let's make it interesting.**
+
+**Work with me**
+
+But do not overdo the jokes.
+
+The final CTA should clearly communicate that I am available for freelance marketing work.
+
+---
+
+# 34. REAL VS SPECULATIVE WORK
+
+This distinction is non-negotiable.
+
+Use visible but elegant labels:
+
+**CLIENT / PROFESSIONAL**
+
+**INDEPENDENT**
+
+**SPECULATIVE**
+
+**PERSONAL EXPERIMENT**
+
+Do NOT make speculative work look like client work.
+
+Do NOT invent client results.
+
+Do NOT write:
+
+> "I helped Zara..."
+
+if I did not.
+
+Instead:
+
+> "Independent strategic exercise inspired by Zara."
+
+Professional honesty is part of the brand.
+
+---
+
+# 35. AI POSITIONING
+
+AI is part of my marketing toolkit.
+
+I have experience with AI-assisted content workflows and AI-assisted website/content planning.
+
+But do NOT make the website say:
+
+> "AI-powered marketer"
+
+or use robot imagery.
+
+Instead, include a small section or visual concept around:
+
+# HOW I WORK WITH AI
+
+AI helps me:
+
+* explore ideas
+* accelerate research
+* synthesise information
+* generate variations
+* build content systems
+* prototype
+* automate repetitive tasks
+
+But:
+
+**strategy**
+**taste**
+**judgement**
+**brand understanding**
+**final creative direction**
+
+remain human responsibilities.
+
+The philosophy:
+
+> **AI is the multiplier. I'm still the marketer.**
+
+---
+
+# 36. PHOTOGRAPHY
+
+I have:
+
+* profile photo
+* casual photos
+* work screenshots
+* campaign creatives
+* videos from projects I ideated/directed for Jagroots and Atlog
+
+I do NOT currently have a professional headshot.
+
+Do not design the site around requiring a professional headshot.
+
+Use casual/professional photography intentionally.
+
+Photography should feel editorial / documentary rather than corporate.
+
+Potential treatments:
+
+* Polaroid
+* cropped editorial image
+* photo strip
+* image + handwritten annotation
+* contact-sheet layout
+
+But use sparingly.
+
+---
+
+# 37. DO NOT USE GENERIC AI IMAGES
+
+If visual assets are missing, use:
+
+* typography
+* shapes
+* actual screenshots
+* subtle texture
+* lines
+* cropped photography
+* paper texture
+* layout
+
+Do NOT fill empty spaces with AI-generated illustrations.
+
+---
+
+# 38. RESPONSIVE DESIGN
+
+Desktop is important.
+
+But mobile must be genuinely designed, not merely shrunk.
+
+On mobile:
+
+* typography should remain dramatic
+* navigation should be simple
+* project cards should remain visually interesting
+* case studies should be readable
+* no horizontal overflow
+* no tiny text
+* no excessive animation
+* no decorative elements covering content
+
+The website must work beautifully at:
+
+320px
+375px
+390px
+430px
+768px
+1024px
+1440px
+1920px
+
+---
+
+# 39. ACCESSIBILITY
+
+Build with:
+
+* semantic HTML
+* proper heading hierarchy
+* keyboard navigation
+* visible focus states
+* sufficient contrast
+* alt text
+* reduced-motion support
+* accessible navigation
+* readable body text
+
+Do not sacrifice accessibility for aesthetics.
+
+---
+
+# 40. ANIMATION PHILOSOPHY
+
+Animation should feel:
+
+**intentional + editorial + slightly playful**
+
+Good:
+
+* subtle hover transformations
+* underline animations
+* image reveals
+* scroll-triggered typography
+* subtle marquee
+* Polaroid rotation
+* project image transitions
+
+Bad:
+
+* excessive parallax
+* constant floating objects
+* loading screens that take forever
+* animated text everywhere
+* scroll hijacking
+* giant cursor effects
+* unnecessary 3D
+
+Every animation should answer:
+
+> "Why is this moving?"
+
+If the answer is "because websites do that", don't add it.
+
+---
+
+# 41. MICROCOPY
+
+Microcopy should occasionally sound like me.
+
+Potential examples:
+
+> Unfortunately, I noticed the marketing.
+
+> This seemed like a good idea at 2 AM.
+
+> Currently making a thing.
+
+> I have thoughts.
+
+> Yes, I analysed this instead of sleeping.
+
+Use these as inspiration, not as mandatory text.
+
+Don't repeat jokes.
+
+---
+
+# 42. WEBSITE SHOULD FEEL ALIVE
+
+The website should have tiny signs of a human behind it.
+
+Examples:
+
+* handwritten annotations
+* editorial notes
+* "last updated" indicators
+* current projects
+* little personal observations
+* subtle imperfection
+* unexpected but useful interactions
+
+But maintain restraint.
+
+---
+
+# 43. SUSTAINABILITY IS A CORE REQUIREMENT
+
+This is one of the most important technical requirements.
+
+I do NOT want to redesign this website every 6–8 months.
+
+The site should be built as a **content system**.
+
+Separate:
+
+### DESIGN SYSTEM
+
+from
+
+### CONTENT
+
+I should be able to change:
+
+* title
+* positioning
+* About copy
+* experience
+* services
+* projects
+* Lab posts
+* writing
+* current interests
+
+without rebuilding the site.
+
+---
+
+# 44. PROJECT DATA ARCHITECTURE
+
+Create a reusable project schema.
+
+For example:
+
+```js
+{
+  slug: "",
+  title: "",
+  subtitle: "",
+  type: "professional | independent | speculative | experiment",
+  industry: "",
+  businessModel: "B2B | B2C | D2C | NA",
+  capabilities: [],
+  date: "",
+  featured: false,
+  thumbnail: "",
+  heroImage: "",
+  summary: "",
+  brief: "",
+  context: "",
+  observation: "",
+  insight: "",
+  strategy: "",
+  work: [],
+  result: "",
+  measurement: "",
+  learning: "",
+  links: []
+}
+```
+
+Use whatever architecture is technically best, but the principle is:
+
+> **Adding a new project should require editing content data, not redesigning components.**
+
+---
+
+# 45. LAB DATA ARCHITECTURE
+
+Use a similar reusable system:
+
+```js
+{
+  slug: "",
+  title: "",
+  category: "",
+  date: "",
+  excerpt: "",
+  content: "",
+  thumbnail: "",
+  tags: []
+}
+```
+
+Again:
+
+Adding a new Lab entry should be easy.
+
+---
+
+# 46. CURRENT PROJECTS
+
+Have a separate data structure for:
+
+* currently building
+* coming soon
+* in progress
+* completed
+
+When a project becomes complete, it should be easy to move it from:
+
+**CURRENTLY IN THE LAB**
+
+to:
+
+**WORK**
+
+without redesigning the page.
+
+---
+
+# 47. TECH STACK
+
+Choose a modern but sensible stack.
+
+Priority:
+
+* GitHub Pages compatibility
+* excellent performance
+* easy maintenance
+* simple deployment
+* accessible
+* SEO friendly
+* minimal unnecessary dependencies
+
+A static site is preferred.
+
+If using React/Vite/Astro/Next static export/etc., choose the approach that is most appropriate for GitHub Pages and explain the choice.
+
+Do NOT introduce a complex backend.
+
+I don't need a database.
+
+I don't need authentication.
+
+I don't need a CMS unless there is a very compelling reason.
+
+The content should live in the repository.
+
+---
+
+# 48. GITHUB PAGES
+
+The final project must be deployable to GitHub Pages.
+
+Include:
+
+* repository structure
+* build instructions
+* deployment instructions
+* GitHub Actions workflow if appropriate
+* custom domain compatibility
+* favicon
+* metadata
+* Open Graph image
+* sitemap
+* robots.txt
+
+Do not hardcode local development URLs.
+
+Use relative/base paths correctly for GitHub Pages.
+
+---
+
+# 49. SEO
+
+The website should have:
+
+Title:
+
+**Ayushi Joshi — Marketing, Ideas & Everything In Between**
+
+(or a stronger version if discovered during development)
+
+Meta description should naturally describe:
+
+* marketing
+* brand
+* campaigns
+* content
+* strategy
+* analytics
+* AI
+* portfolio
+
+Create proper:
+
+* title tags
+* meta descriptions
+* OG tags
+* Twitter/X cards
+* canonical URL placeholder
+* sitemap
+* robots.txt
+* semantic headings
+
+Do not keyword-stuff.
+
+---
+
+# 50. PERFORMANCE
+
+The site should be fast.
+
+Optimize:
+
+* image sizes
+* lazy loading
+* font loading
+* JS bundle
+* CSS
+* animations
+
+Avoid huge libraries for tiny effects.
+
+No unnecessary animation libraries unless justified.
+
+---
+
+# 51. CONTENT ACCURACY
+
+Use ONLY information supplied in this brief and the attached resume.
+
+Do not invent:
+
+* clients
+* metrics
+* campaign results
+* job responsibilities
+* brands
+* testimonials
+* certifications
+* awards
+* degrees
+* tools
+* paid media experience
+
+If content is missing:
+
+Use a clearly marked placeholder.
+
+Never fabricate.
+
+---
+
+# 52. CURRENT RESUME-BASED INFORMATION
+
+Use this as the factual foundation.
+
+## EDUCATION
+
+MBA Marketing
+MIT World Peace University
+2025–2027
+CGPA: 8.59
+
+BBA
+DAVV, Indore
+2021–2024
+CGPA: 8.35
+
+---
+
+## CERTIFICATIONS
+
+* Amazon Ads Foundation Certification
+* Google Digital Marketing & E-Commerce Professional Certificate
+* Google AI Professional Certificate
+* Meta Social Media Marketing Professional Certificate
+
+Do NOT create a giant certification wall.
+
+Keep this secondary.
+
+---
+
+# 53. EXPERIENCE SUMMARY
+
+Use the experience detailed earlier in this prompt.
+
+The experience section should be concise.
+
+The deeper details should appear inside relevant work/case studies.
+
+---
+
+# 54. THE WEBSITE SHOULD NOT FEEL LIKE A RESUME
+
+This is a major requirement.
+
+The existing portfolio became too resume-like.
+
+Avoid:
+
+* giant skills lists
+* giant certification sections
+* leadership as a primary section
+* experience occupying the majority of the homepage
+* repetitive bullet points
+* "objective"
+* "career summary"
+* "professional skills"
+
+The resume can be downloaded separately.
+
+The portfolio should demonstrate:
+
+**thinking + work + personality + proof.**
+
+---
+
+# 55. RESUME DOWNLOAD
+
+Include a subtle:
+
+**VIEW RESUME**
+
+or
+
+**DOWNLOAD RESUME**
+
+CTA.
+
+It should not dominate the site.
+
+---
+
+# 56. RECRUITER USER JOURNEY
+
+A recruiter should understand within 30 seconds:
+
+1. Who Ayushi is
+2. What kind of marketer she is
+3. What she's actually done
+4. Evidence / metrics
+5. What she can do
+6. Where to see the work
+7. How to contact her
+
+Do not make them hunt.
+
+---
+
+# 57. FREELANCE USER JOURNEY
+
+A freelance client should understand within 30 seconds:
+
+1. What problems Ayushi can help solve
+2. What services she offers
+3. What proof exists
+4. What kind of brands/projects she likes
+5. How she thinks
+6. How to contact her
+
+Make the Work With Me path obvious.
+
+---
+
+# 58. HOMEPAGE SHOULD NOT TRY TO SHOW EVERYTHING
+
+The homepage is a trailer.
+
+Not the entire movie.
+
+Use:
+
+* strong positioning
+* proof
+* selected work
+* capabilities
+* current projects
+* short About
+* CTA
+
+Then let the other pages do the heavy lifting.
+
+---
+
+# 59. FOOTER
+
+The footer should feel like a natural conclusion.
+
+Potential copy:
+
+> **Have a brief?**
+>
+> Send it my way.
+
+Then:
+
+Work
+Services
+Lab
+Writing
+About
+Contact
+LinkedIn
+Upwork
+
+And a small line such as:
+
+> Made with too many tabs open.
+
+Only if it feels natural.
+
+---
+
+# 60. DESIGN SYSTEM TOKENS
+
+Create a central design token system for:
+
+* colors
+* typography
+* spacing
+* border radius
+* shadows
+* transitions
+* breakpoints
+
+Do NOT scatter values throughout the code.
+
+I should be able to change the pink or typography globally from one place.
+
+---
+
+# 61. COMPONENT SYSTEM
+
+Build reusable components for:
+
+* Navigation
+* Footer
+* Section heading
+* Project card
+* Project tag
+* Metric
+* Case-study section
+* Image gallery
+* CTA
+* Service block
+* Lab card
+* Writing card
+* Timeline
+* Badge
+* Button
+* Filter
+* Currently-in-lab card
+
+Do not duplicate markup unnecessarily.
+
+---
+
+# 62. CONTENT MANAGEMENT PHILOSOPHY
+
+I am a marketer, not a developer.
+
+Updating the website should be easy.
+
+Ideally, I should be able to:
+
+1. Open one file.
+2. Add a new project.
+3. Add title.
+4. Add description.
+5. Add images.
+6. Add case-study sections.
+7. Push to GitHub.
+8. Website updates.
+
+Document this process clearly in README.
+
+---
+
+# 63. EMPTY STATES
+
+Because this website will grow over time, empty states matter.
+
+If there are no projects in a category, don't show a broken page.
+
+Use tasteful messaging such as:
+
+> **Nothing here yet. I'm working on it.**
+
+or
+
+> **This corner is still under construction.**
+
+Keep it minimal.
+
+---
+
+# 64. DO NOT BUILD ALL SIX PROJECTS NOW
+
+Build the SYSTEM.
+
+For missing projects:
+
+Use elegant "coming soon / currently building" placeholders.
+
+Do not fabricate content.
+
+The website must feel complete even with only existing professional work + a few initial placeholders.
+
+---
+
+# 65. THE WEBSITE SHOULD EVOLVE WITH AYUSHI
+
+This is a core principle.
+
+I made my previous website approximately 7 months ago and already feel that my personality and professional direction have changed.
+
+The new site must therefore behave like a **living portfolio**.
+
+It should be easy to update:
+
+**Now**
+
+**Work**
+
+**Lab**
+
+**Writing**
+
+**Services**
+
+**About**
+
+without redesigning the whole site.
+
+---
+
+# 66. FINAL CREATIVE TEST
+
+Before considering the site finished, ask:
+
+### Does it look like a resume?
+
+If yes → redesign.
+
+### Does it look like an AI-generated portfolio?
+
+If yes → redesign.
+
+### Does it look like a Canva template?
+
+If yes → redesign.
+
+### Does it look like a corporate SaaS landing page?
+
+If yes → redesign.
+
+### Does it look childish?
+
+If yes → redesign.
+
+### Does it look boring?
+
+If yes → redesign.
+
+### Does it feel like a human marketer with taste, curiosity and personality built it?
+
+If no → redesign.
+
+---
+
+# 67. THE MOST IMPORTANT TEST
+
+Imagine a hiring manager sees the homepage for 30 seconds.
+
+The intended reaction is:
+
+> **"She's creative, but she actually understands marketing."**
+
+Then:
+
+> **"I want to interview her."**
+
+Then:
+
+> **"She could actually work with our clients."**
+
+If the website does not produce that feeling, keep iterating.
+
+---
+
+# 68. DO NOT ASK ME TO APPROVE EVERY SMALL DESIGN DECISION
+
+You are expected to make strong design decisions yourself.
+
+Use this brief as the creative direction.
+
+If something is ambiguous:
+
+* choose the more editorial option
+* choose the more intentional option
+* choose the less generic option
+* choose the option with more personality
+* choose restraint over decoration
+
+Do not add features simply because they are technically impressive.
+
+---
+
+# 69. BEFORE CODING
+
+First:
+
+1. Analyse this entire brief.
+2. Create a concise internal design strategy.
+3. Define the information architecture.
+4. Define the design system.
+5. Define the component architecture.
+6. Define the content architecture.
+7. Then build.
+
+Do not spend the first step writing a generic portfolio.
+
+---
+
+# 70. DELIVERABLES
+
+I want:
+
+### 1. Complete working website
+
+### 2. Responsive desktop + mobile
+
+### 3. Reusable project architecture
+
+### 4. Reusable Lab architecture
+
+### 5. Reusable Writing architecture
+
+### 6. Services architecture
+
+### 7. Experience timeline
+
+### 8. About page
+
+### 9. Work page
+
+### 10. Home page
+
+### 11. Contact / Work With Me
+
+### 12. SEO setup
+
+### 13. GitHub Pages deployment configuration
+
+### 14. README
+
+The README should explain:
+
+* how to run locally
+* how to build
+* how to deploy
+* where project content lives
+* where images live
+* how to add a project
+* how to add a Lab entry
+* how to change About content
+* how to update experience
+* how to update services
+* how to change colours
+* how to change fonts
+
+---
+
+# 71. INITIAL CONTENT PRIORITY
+
+Use my actual professional experience as the initial portfolio foundation.
+
+Prioritise work around:
+
+* Jagroots
+* Cogent
+* iQuanta
+* AISECT
+* freelance work
+
+Then create placeholders for:
+
+* Brand Observatory
+* The Big Idea
+* Campaign Room
+* I Have Thoughts
+* Copy That
+* The Funnel
+
+---
+
+# 72. FINAL DESIGN DIRECTION IN ONE SENTENCE
+
+If you need one sentence to guide every decision:
+
+> **Build an editorial, colourful, intelligent personal marketing studio that feels like a very good marketer's notebook accidentally became a website — professional enough for a hiring manager, interesting enough for a creative director, and useful enough for a freelance client.**
+
+Do NOT make it look like an AI portfolio.
+
+Do NOT make it look like a resume.
+
+Do NOT make it look like a template.
+
+Make it feel like **Ayushi**.
+
+Now build it.
