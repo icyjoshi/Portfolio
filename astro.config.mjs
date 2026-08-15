@@ -17,8 +17,8 @@ import sitemap from '@astrojs/sitemap';
        BASE = '/'
        …and put the domain in  public/CNAME
    ──────────────────────────────────────────────────────────────── */
-const SITE = 'https://ayushijoshi.github.io';
-const BASE = '/';
+const SITE = 'https://icyjoshi.github.io';
+const BASE = '/Portfolio';
 
 export default defineConfig({
   site: SITE,

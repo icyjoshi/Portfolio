@@ -26,12 +26,12 @@ export const site = {
   /* ---------- Contact ----------
      [ADD] Replace the placeholder URLs below with your real profiles.
      Anything left as '#' is hidden from the footer automatically. */
-  email: 'joshiaayu06@gmail.com',
+  email: 'ayushijoshi.e@gmail.com',
   location: 'Pune, India',
   availability: 'Open to freelance briefs and full-time roles',
 
   socials: [
-    { label: 'LinkedIn', href: '#', note: '[ADD] your LinkedIn URL' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/-ayushi-joshi/', note: '[ADD] your LinkedIn URL' },
     { label: 'Upwork', href: '#', note: '[ADD] your Upwork URL' },
     { label: 'Email', href: 'mailto:joshiaayu06@gmail.com', note: '' },
   ],
