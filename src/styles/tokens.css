@@ -1,0 +1,224 @@
+/* ============================================================
+   DESIGN TOKENS
+   Everything visual is defined here. Change a value once,
+   it changes everywhere on the site.
+
+   Sections:
+     1. Colour
+     2. Typography
+     3. Spacing
+     4. Layout
+     5. Lines, radius, shadow
+     6. Motion
+     7. Texture
+   ============================================================ */
+
+:root {
+  /* ---------------------------------------------------------
+     1. COLOUR
+     Ratio target across the site: 60% paper / 25% ink /
+     10% pink / 5% everything else.
+     --------------------------------------------------------- */
+
+  /* Core two */
+  --c-ink: #17152b;           /* deep ink-plum: authority, strategy   */
+  --c-paper: #f7f1e7;         /* warm ivory: editorial, reading       */
+
+  /* Brand accent — pink = personality */
+  --c-pink: #f04a8a;          /* fills, large type, marks             */
+  --c-pink-deep: #c2185b;     /* text + links (AA on paper: 5.2:1)    */
+  --c-pink-wash: #fbdbe8;     /* highlight washes, tints              */
+
+  /* Secondary accent — yellow = action */
+  --c-yellow: #f6c945;        /* CTA fills (ink on yellow: 11.5:1)    */
+  --c-yellow-wash: #fdf0c9;
+
+  /* Used sparingly */
+  --c-cyan: #5cc8d7;          /* data / analytics moments only        */
+  --c-lime: #c9d64b;          /* tags, tiny marks only                */
+
+  /* Derived neutrals */
+  --c-ink-soft: #4a4560;      /* secondary text on paper (8.1:1)      */
+  --c-ink-mute: #6b6580;      /* tertiary text, captions              */
+  --c-paper-deep: #efe6d8;    /* alternate band background            */
+  --c-paper-dim: #e6dccb;     /* insets, table stripes                */
+  --c-rule: #d8cdb9;          /* hairlines on paper                   */
+  --c-rule-ink: #35304f;      /* hairlines on ink                     */
+  --c-ink-raise: #211e3a;     /* raised surface on dark               */
+
+  /* Semantic roles — components reference these, not raw colours,
+     so a section can be re-skinned by overriding four variables. */
+  --bg: var(--c-paper);
+  --fg: var(--c-ink);
+  --fg-soft: var(--c-ink-soft);
+  --fg-mute: var(--c-ink-mute);
+  --accent: var(--c-pink-deep);
+  --accent-loud: var(--c-pink);
+  --rule: var(--c-rule);
+  --selection-bg: var(--c-pink);
+  --selection-fg: #ffffff;
+
+  /* ---------------------------------------------------------
+     2. TYPOGRAPHY
+     --------------------------------------------------------- */
+  --ff-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --ff-body: 'Archivo Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ff-mono: 'Space Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  /* Fraunces axis presets — the "wonk" axis is what stops the
+     display face from reading like a default serif. */
+  --wonk-on: 'WONK' 1;
+  --wonk-off: 'WONK' 0;
+
+  /* Fluid scale. Min values are the mobile (320px) sizes and are
+     deliberately still large — mobile keeps the drama. */
+  --fs-display: clamp(3rem, 10.5vw, 8.5rem);
+  --fs-h1: clamp(2.5rem, 6.5vw, 5rem);
+  --fs-h2: clamp(1.875rem, 4vw, 3rem);
+  --fs-h3: clamp(1.3125rem, 2.1vw, 1.75rem);
+  --fs-h4: clamp(1.0625rem, 1.5vw, 1.25rem);
+  --fs-lead: clamp(1.125rem, 1.7vw, 1.375rem);
+  --fs-body: 1.0625rem;      /* 17px — body never goes below this   */
+  --fs-small: 0.9375rem;     /* 15px                                 */
+  --fs-label: 0.75rem;       /* 12px mono, always uppercase+tracked  */
+  --fs-micro: 0.6875rem;     /* 11px — annotations only              */
+
+  --lh-tight: 0.94;
+  --lh-snug: 1.08;
+  --lh-heading: 1.14;
+  --lh-body: 1.68;
+  --lh-loose: 1.8;
+
+  --ls-display: -0.03em;
+  --ls-heading: -0.018em;
+  --ls-body: 0;
+  --ls-label: 0.14em;
+
+  --fw-body: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-display: 500;
+  --fw-display-heavy: 700;
+
+  --measure: 68ch;           /* max reading width for prose          */
+  --measure-tight: 54ch;
+
+  /* ---------------------------------------------------------
+     3. SPACING  (4px base)
+     --------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3rem;
+  --sp-9: 4rem;
+  --sp-10: 5rem;
+  --sp-11: 6.5rem;
+  --sp-12: 8rem;
+
+  /* Vertical rhythm between major page sections */
+  --section-y: clamp(4rem, 9vw, 8rem);
+  --section-y-tight: clamp(2.75rem, 5vw, 4.5rem);
+
+  /* ---------------------------------------------------------
+     4. LAYOUT
+     --------------------------------------------------------- */
+  --w-max: 82.5rem;          /* 1320px outer content width           */
+  --w-text: 46rem;           /* editorial text column                */
+  --w-narrow: 38rem;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --grid-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+
+  /* The margin rail — the site's signature layout device.
+     A numbered notebook margin down the left of major sections. */
+  --rail-w: 8.5rem;
+
+  --nav-h: 4.5rem;
+
+  /* ---------------------------------------------------------
+     5. LINES, RADIUS, SHADOW
+     Deliberately near-zero radius: this is a printed document,
+     not a dashboard. Shadows are hard offsets, like paper.
+     --------------------------------------------------------- */
+  --line: 1px;
+  --line-thick: 2px;
+  --line-heavy: 4px;
+
+  --r-none: 0;
+  --r-xs: 2px;
+  --r-sm: 3px;
+  --r-pill: 999px;
+
+  --shadow-print: 6px 6px 0 var(--c-ink);
+  --shadow-print-pink: 6px 6px 0 var(--c-pink);
+  --shadow-lift: 0 2px 0 var(--c-ink);
+
+  /* ---------------------------------------------------------
+     6. MOTION
+     --------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 140ms;
+  --t-base: 260ms;
+  --t-slow: 620ms;
+
+  /* Set to 0 by the reduced-motion block below. Any transform-based
+     entrance animation multiplies its distance by this. */
+  --motion: 1;
+
+  /* ---------------------------------------------------------
+     7. TEXTURE
+     Paper grain. Inline SVG turbulence — ~200 bytes, no image
+     request, and it is what keeps the ivory from looking flat.
+     --------------------------------------------------------- */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------
+   DARK SURFACE
+   Not a theme toggle — a section-level inversion. Put
+   `data-surface="ink"` on any element and everything inside it
+   re-skins for the dark slab.
+   ------------------------------------------------------------ */
+[data-surface='ink'] {
+  --bg: var(--c-ink);
+  --fg: var(--c-paper);
+  --fg-soft: #b9b2c9;
+  --fg-mute: #8c85a3;
+  --accent: var(--c-pink);
+  --accent-loud: var(--c-pink);
+  --rule: var(--c-rule-ink);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+[data-surface='paper-deep'] {
+  --bg: var(--c-paper-deep);
+  background-color: var(--bg);
+}
+
+[data-surface='pink'] {
+  --bg: var(--c-pink);
+  --fg: #2a0a18;
+  --fg-soft: #52102b;
+  --fg-mute: #6b1c3a;
+  --accent: #2a0a18;
+  --rule: rgba(42, 10, 24, 0.25);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* ------------------------------------------------------------
+   REDUCED MOTION — honoured globally, not per-component.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0;
+    --t-fast: 1ms;
+    --t-base: 1ms;
+    --t-slow: 1ms;
+  }
+}

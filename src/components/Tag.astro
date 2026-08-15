@@ -1,0 +1,95 @@
+---
+/**
+ * Small taxonomy chip: capability, industry, business model, category.
+ *
+ * `tone="type"` is reserved for the work-type label (Professional /
+ * Independent / Speculative / Experiment). That one is never
+ * decorative — it is the honesty label, so it gets its own weight.
+ */
+interface Props {
+  tone?: 'quiet' | 'type' | 'accent' | 'status';
+  type?: 'professional' | 'independent' | 'speculative' | 'experiment';
+  class?: string;
+}
+
+const { tone = 'quiet', type, class: className = '' } = Astro.props;
+---
+
+<span class={`tag tag--${tone} ${className}`} data-type={type}>
+  <slot />
+</span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 0.45em 0.7em;
+    border: var(--line) solid var(--rule);
+    border-radius: var(--r-xs);
+    color: var(--fg-mute);
+    white-space: nowrap;
+  }
+
+  .tag--accent {
+    color: var(--accent);
+    border-color: currentColor;
+  }
+
+  .tag--status {
+    border-style: dashed;
+  }
+
+  /* ---- The honesty label ----
+     Distinct colour per work type so the distinction is visible at a
+     glance, and the same everywhere it appears on the site. */
+  .tag--type {
+    border-width: var(--line-thick);
+    font-weight: 700;
+    color: var(--c-ink);
+    background: var(--c-paper);
+  }
+
+  .tag--type[data-type='professional'] {
+    border-color: var(--c-ink);
+    background: var(--c-ink);
+    color: var(--c-paper);
+  }
+
+  .tag--type[data-type='independent'] {
+    border-color: var(--c-pink);
+    color: var(--c-pink-deep);
+  }
+
+  .tag--type[data-type='speculative'] {
+    border-color: var(--c-cyan);
+    color: #0d5f6b;
+  }
+
+  .tag--type[data-type='experiment'] {
+    border-color: var(--c-yellow);
+    color: #6b5209;
+  }
+
+  :global([data-surface='ink']) .tag--type {
+    background: transparent;
+  }
+
+  :global([data-surface='ink']) .tag--type[data-type='professional'] {
+    background: var(--c-paper);
+    color: var(--c-ink);
+  }
+
+  :global([data-surface='ink']) .tag--type[data-type='speculative'] {
+    color: var(--c-cyan);
+  }
+
+  :global([data-surface='ink']) .tag--type[data-type='experiment'] {
+    color: var(--c-yellow);
+  }
+</style>

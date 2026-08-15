@@ -1,0 +1,175 @@
+---
+/**
+ * Button / CTA.
+ *
+ * Renders <a> when given an href, <button> otherwise, so it is always
+ * the semantically correct element rather than a styled div.
+ *
+ * Variants:
+ *   solid  — yellow fill. The action colour. Use once per view.
+ *   ink    — dark fill. Secondary weight, still confident.
+ *   ghost  — outlined. Tertiary.
+ *   text   — arrow link. Inline, lowest weight.
+ */
+import { url } from '@lib/url';
+
+interface Props {
+  href?: string;
+  variant?: 'solid' | 'ink' | 'ghost' | 'text';
+  size?: 'md' | 'lg';
+  /** Skip base-path prefixing for mailto:, tel: and external links. */
+  external?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'solid',
+  size = 'md',
+  external = false,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const isExternal =
+  external ||
+  (href ? /^(https?:|mailto:|tel:|#)/.test(href) : false);
+
+const finalHref = href ? (isExternal ? href : url(href)) : undefined;
+const Tag = href ? 'a' : 'button';
+const classes = `btn btn--${variant} btn--${size} ${className}`.trim();
+
+const externalAttrs =
+  href && /^https?:/.test(href)
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {};
+---
+
+<Tag class={classes} href={finalHref} {...externalAttrs} {...rest}>
+  <span class="btn__label"><slot /></span>
+  {
+    variant === 'text' && (
+      <span class="btn__arrow" aria-hidden="true">
+        →
+      </span>
+    )
+  }
+</Tag>
+
+<style>
+  .btn {
+    --btn-py: 0.75rem;
+    --btn-px: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--btn-py) var(--btn-px);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    text-decoration: none;
+    border: var(--line-thick) solid var(--c-ink);
+    border-radius: var(--r-xs);
+    background: transparent;
+    color: var(--c-ink);
+    cursor: pointer;
+    transition:
+      transform var(--t-fast) var(--ease),
+      box-shadow var(--t-fast) var(--ease),
+      background-color var(--t-fast) var(--ease),
+      color var(--t-fast) var(--ease);
+    /* Guards the layout on 320px screens */
+    max-width: 100%;
+  }
+
+  .btn--lg {
+    --btn-py: 1rem;
+    --btn-px: 2rem;
+    font-size: var(--fs-small);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- solid: the action colour ---- */
+  .btn--solid {
+    background: var(--c-yellow);
+    color: var(--c-ink);
+    box-shadow: 3px 3px 0 var(--c-ink);
+  }
+
+  .btn--solid:hover,
+  .btn--solid:focus-visible {
+    transform: translate(calc(-2px * var(--motion)), calc(-2px * var(--motion)));
+    box-shadow: 5px 5px 0 var(--c-ink);
+  }
+
+  .btn--solid:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--c-ink);
+  }
+
+  /* ---- ink ---- */
+  .btn--ink {
+    background: var(--c-ink);
+    color: var(--c-paper);
+    box-shadow: 3px 3px 0 var(--c-pink);
+  }
+
+  .btn--ink:hover,
+  .btn--ink:focus-visible {
+    transform: translate(calc(-2px * var(--motion)), calc(-2px * var(--motion)));
+    box-shadow: 5px 5px 0 var(--c-pink);
+  }
+
+  /* ---- ghost ---- */
+  .btn--ghost {
+    border-color: currentColor;
+    color: var(--fg);
+  }
+
+  .btn--ghost:hover,
+  .btn--ghost:focus-visible {
+    background: var(--c-ink);
+    color: var(--c-paper);
+  }
+
+  :global([data-surface='ink']) .btn--ghost:hover,
+  :global([data-surface='ink']) .btn--ghost:focus-visible {
+    background: var(--c-paper);
+    color: var(--c-ink);
+  }
+
+  /* ---- text ---- */
+  .btn--text {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    box-shadow: none;
+  }
+
+  .btn--text .btn__label {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% var(--line-thick);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size var(--t-base) var(--ease);
+  }
+
+  .btn--text:hover .btn__label,
+  .btn--text:focus-visible .btn__label {
+    background-size: 100% var(--line-thick);
+  }
+
+  .btn__arrow {
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .btn--text:hover .btn__arrow,
+  .btn--text:focus-visible .btn__arrow {
+    transform: translateX(calc(4px * var(--motion)));
+  }
+</style>

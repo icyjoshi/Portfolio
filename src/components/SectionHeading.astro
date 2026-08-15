@@ -1,0 +1,42 @@
+---
+/**
+ * Section title block: optional mono kicker, the heading itself,
+ * and an optional standfirst underneath.
+ *
+ * `level` keeps the heading hierarchy correct per page — a section
+ * heading is usually h2, but inside a case study it may be h3.
+ */
+interface Props {
+  kicker?: string;
+  title: string;
+  lead?: string;
+  level?: 2 | 3;
+  id?: string;
+  class?: string;
+}
+
+const { kicker, title, lead, level = 2, id, class: className = '' } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+---
+
+<header class={`sec-head ${className}`}>
+  {kicker && <p class="label label--accent sec-head__kicker">{kicker}</p>}
+  <Heading id={id} class="sec-head__title">{title}</Heading>
+  {lead && <p class="lead sec-head__lead">{lead}</p>}
+  <slot />
+</header>
+
+<style>
+  .sec-head {
+    margin-bottom: var(--sp-7);
+  }
+
+  .sec-head__kicker {
+    margin-bottom: var(--sp-3);
+  }
+
+  .sec-head__lead {
+    margin-top: var(--sp-4);
+    max-width: var(--measure-tight);
+  }
+</style>

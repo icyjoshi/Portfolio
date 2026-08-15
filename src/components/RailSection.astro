@@ -1,0 +1,61 @@
+---
+/**
+ * The site's signature layout device: a numbered notebook margin
+ * running down the left of a section, with room for a margin note.
+ *
+ * On desktop the margin is sticky, so the section number stays with
+ * you as you read. Below 62rem it collapses to a single line above
+ * the content rather than squeezing into a narrow column.
+ */
+interface Props {
+  /** "01", "02"… Shown in the margin. */
+  num?: string;
+  /** Optional margin note. Keep it under ~10 words. */
+  note?: string;
+  id?: string;
+  surface?: 'paper' | 'paper-deep' | 'ink' | 'pink';
+  tight?: boolean;
+  class?: string;
+  /** Draw a hairline across the top of the section. */
+  ruled?: boolean;
+}
+
+const {
+  num,
+  note,
+  id,
+  surface = 'paper',
+  tight = false,
+  ruled = false,
+  class: className = '',
+} = Astro.props;
+---
+
+<section
+  class={`section ${tight ? 'section--tight' : ''} ${className}`}
+  id={id}
+  data-surface={surface === 'paper' ? undefined : surface}
+>
+  <div class="wrap">
+    {ruled && <hr class="hr hr--heavy sec-rule" />}
+    <div class="rail">
+      <div class="rail__aside">
+        {num && <span class="rail__num">{num}</span>}
+        {note && <span class="rail__note">{note}</span>}
+      </div>
+      <div class="rail__body">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sec-rule {
+    margin-bottom: var(--sp-6);
+  }
+
+  .rail__body {
+    min-width: 0; /* lets long words and tables shrink instead of overflow */
+  }
+</style>

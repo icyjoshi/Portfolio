@@ -1,0 +1,180 @@
+---
+/**
+ * Footer. Reads as the end of a document, not a sitemap dump:
+ * one big closing line, then the practical bits underneath.
+ */
+import { site, footer } from '@data/site';
+import { url } from '@lib/url';
+import Button from './Button.astro';
+
+/* Socials still set to '#' are unfinished placeholders — hide them
+   rather than shipping dead links. */
+const socials = site.socials.filter((s) => s.href !== '#');
+const hiddenSocials = site.socials.filter((s) => s.href === '#');
+---
+
+<footer class="foot" data-surface="ink">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__pitch">
+        <h2 class="foot__headline">{footer.headline}</h2>
+        <p class="foot__subline">{footer.subline}</p>
+        <Button href={footer.cta.href} variant="solid" size="lg">
+          {footer.cta.label}
+        </Button>
+        <p class="foot__mail">
+          or just email me —
+          <a class="link" href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </div>
+
+      <div class="foot__cols">
+        {
+          footer.columns.map((col) => (
+            <nav class="foot__col" aria-label={col.title}>
+              <p class="label foot__col-title">{col.title}</p>
+              <ul>
+                {col.links.map((l) => (
+                  <li>
+                    <a class="link-wipe" href={url(l.href)}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))
+        }
+
+        <div class="foot__col">
+          <p class="label foot__col-title">Elsewhere</p>
+          <ul>
+            {
+              socials.map((s) => (
+                <li>
+                  <a
+                    class="link-wipe"
+                    href={s.href}
+                    target={s.href.startsWith('http') ? '_blank' : undefined}
+                    rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <a class="link-wipe" href={url(site.resume)}>Résumé (PDF)</a>
+            </li>
+          </ul>
+          {
+            /* Dev-only nudge so placeholders never quietly ship */
+            import.meta.env.DEV && hiddenSocials.length > 0 && (
+              <p class="foot__todo">
+                Hidden until set: {hiddenSocials.map((s) => s.label).join(', ')} —
+                see src/data/site.ts
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr foot__rule" />
+
+    <div class="foot__bottom">
+      <p class="label">© {new Date().getFullYear()} {site.name}</p>
+      <p class="label foot__colophon">{footer.colophon}</p>
+      <p class="label">Last updated {site.lastUpdated}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    padding-block: var(--section-y) var(--sp-7);
+    margin-top: auto;
+  }
+
+  .foot__top {
+    display: grid;
+    gap: var(--sp-9);
+  }
+
+  .foot__headline {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+  }
+
+  .foot__subline {
+    margin: var(--sp-4) 0 var(--sp-6);
+    font-size: var(--fs-lead);
+    color: var(--fg-soft);
+    max-width: 28ch;
+  }
+
+  .foot__mail {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-small);
+    color: var(--fg-mute);
+  }
+
+  .foot__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .foot__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .foot__col a {
+    text-decoration: none;
+    font-size: var(--fs-small);
+    color: var(--fg);
+  }
+
+  .foot__col-title {
+    margin-bottom: var(--sp-4);
+    color: var(--accent);
+  }
+
+  .foot__todo {
+    margin-top: var(--sp-4);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    color: var(--c-yellow);
+  }
+
+  .foot__rule {
+    margin-block: var(--sp-8) var(--sp-5);
+  }
+
+  .foot__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3) var(--sp-6);
+    justify-content: space-between;
+  }
+
+  .foot__colophon {
+    color: var(--fg-soft);
+  }
+
+  @media (min-width: 56rem) {
+    .foot__top {
+      grid-template-columns: 1.25fr 1fr;
+      gap: var(--sp-10);
+    }
+
+    .foot__headline {
+      font-size: clamp(3rem, 5.5vw, 4.5rem);
+    }
+  }
+</style>
