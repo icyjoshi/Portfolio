@@ -1,0 +1,89 @@
+---
+/**
+ * 404. GitHub Pages serves /404.html automatically for missing paths.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/Button.astro';
+import { nav } from '@data/site';
+import { url } from '@lib/url';
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="nf">
+    <div class="wrap">
+      <p class="label label--accent">Error 404</p>
+      <h1 class="nf__title">This page does not exist.</h1>
+      <p class="lead nf__lead">
+        Either it moved, or it was one of those things that seemed like a good
+        idea at 2 AM and did not survive the morning.
+      </p>
+
+      <div class="nf__actions">
+        <Button href="/" variant="solid">Back to the start</Button>
+        <Button href="/work" variant="ghost">See the work</Button>
+      </div>
+
+      <nav class="nf__nav" aria-label="All pages">
+        <p class="label">Everything else</p>
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a class="link" href={url(item.href)}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a class="link" href={url('/contact')}>Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    padding-block: clamp(3rem, 10vw, 8rem);
+  }
+
+  .nf__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-display);
+    font-family: var(--ff-display);
+    font-weight: 500;
+    font-variation-settings: var(--wonk-on);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-display);
+    max-width: 12ch;
+  }
+
+  .nf__lead {
+    margin-top: var(--sp-5);
+    max-width: 44ch;
+  }
+
+  .nf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    margin-top: var(--sp-7);
+  }
+
+  .nf__nav {
+    margin-top: var(--sp-9);
+    padding-top: var(--sp-5);
+    border-top: var(--line) solid var(--c-rule);
+  }
+
+  .nf__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-5);
+    margin-top: var(--sp-4);
+    padding: 0;
+    list-style: none;
+  }
+</style>

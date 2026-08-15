@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Update the domain here if you move to a custom domain.
+Sitemap: https://ayushijoshi.github.io/sitemap-index.xml

@@ -1,0 +1,171 @@
+---
+/**
+ * A single Lab post. Deliberately plainer than a case study — this is
+ * a reading page, so it is one column and gets out of the way.
+ */
+import { render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getLabPosts, formatLongDate, readingTime } from '@lib/content';
+import { url } from '@lib/url';
+
+export async function getStaticPaths() {
+  const posts = await getLabPosts();
+  return posts.map((entry, i, arr) => ({
+    params: { slug: entry.id },
+    props: { entry, next: arr[i + 1] ?? arr[0] ?? null },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.excerpt}
+  type="article"
+  publishedTime={d.date}
+>
+  <article class="post">
+    <header class="post__head">
+      <div class="wrap wrap--text">
+        <nav class="post__back" aria-label="Breadcrumb">
+          <a class="link" href={url('/lab')}>← The Lab</a>
+        </nav>
+
+        <p class="post__meta">
+          <span class="post__cat">{d.category}</span>
+          <time datetime={d.date.toISOString()}>{formatLongDate(d.date)}</time>
+          <span>{readingTime(entry.body)}</span>
+        </p>
+
+        <h1 class="post__title">{d.title}</h1>
+        <p class="lead post__excerpt">{d.excerpt}</p>
+      </div>
+    </header>
+
+    <div class="wrap wrap--text">
+      <div class="prose post__body">
+        <Content />
+      </div>
+
+      {
+        d.tags.length > 0 && (
+          <ul class="post__tags">
+            {d.tags.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        )
+      }
+
+      {
+        next && next.id !== entry.id && (
+          <a class="post__next" href={url(`/lab/${next.id}`)}>
+            <span class="label">Next in the Lab</span>
+            <span class="post__next-title">{next.data.title}</span>
+          </a>
+        )
+      }
+    </div>
+  </article>
+
+  <CtaBand
+    headline="I have more of these."
+    line="If you would rather I aimed this kind of attention at your brand instead of a random one, that can be arranged."
+    ctaLabel="Work with me"
+  />
+</BaseLayout>
+
+<style>
+  .post__head {
+    padding-block: clamp(2rem, 5vw, 3.5rem) var(--sp-7);
+  }
+
+  .post__back {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  .post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-3);
+    margin-top: var(--sp-6);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .post__cat {
+    color: var(--c-pink-deep);
+  }
+
+  .post__meta > * + *::before {
+    content: '·';
+    margin-right: var(--sp-3);
+  }
+
+  .post__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+  }
+
+  .post__excerpt {
+    margin-top: var(--sp-5);
+    max-width: var(--measure-tight);
+  }
+
+  .post__body {
+    padding-bottom: var(--sp-8);
+    border-top: var(--line-thick) solid var(--c-ink);
+    padding-top: var(--sp-7);
+  }
+
+  .post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-3);
+    padding: 0 0 var(--sp-8);
+    list-style: none;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .post__tags li + li::before {
+    content: '·';
+    margin-right: var(--sp-3);
+  }
+
+  .post__next {
+    display: grid;
+    gap: var(--sp-2);
+    padding-block: var(--sp-6) var(--sp-9);
+    border-top: var(--line) solid var(--c-rule);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post__next-title {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .post__next:hover .post__next-title {
+    color: var(--c-pink-deep);
+  }
+</style>

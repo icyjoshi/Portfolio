@@ -1,0 +1,363 @@
+---
+/**
+ * About.
+ *
+ * Answers how she thinks, not what she has done — the timeline is
+ * further down and stays deliberately compact. Education and
+ * certifications sit at the very bottom, small, where they belong.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import Timeline from '@components/Timeline.astro';
+import Button from '@components/Button.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { about } from '@data/about';
+import { site, education, certifications } from '@data/site';
+import { url } from '@lib/url';
+---
+
+<BaseLayout
+  title="About"
+  description="Ayushi Joshi — MBA Marketing student and multidisciplinary marketer working across brand, campaigns, content, community and analytics. How she thinks and where she is heading."
+>
+  <!-- ============ HEAD ============ -->
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label label--accent">About</p>
+      <h1 class="page-head__title">{about.headline}</h1>
+      <p class="lead page-head__lead">{about.standfirst}</p>
+      <div class="page-head__actions">
+        <Button href={site.resume} variant="ghost">View résumé (PDF)</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTERS ============ -->
+  {
+    about.chapters.map((c, i) => (
+      <RailSection
+        num={c.num}
+        note={c.note}
+        surface={i % 2 === 1 ? 'paper-deep' : 'paper'}
+        tight
+      >
+        <div class="chapter">
+          <h2 class="chapter__title">{c.title}</h2>
+          <div class="chapter__body">
+            {c.body.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+        </div>
+      </RailSection>
+    ))
+  }
+
+  <!-- ============ QUICK FACTS ============ -->
+  <section class="facts" data-surface="ink">
+    <div class="wrap">
+      <dl class="facts__grid">
+        {
+          about.quickFacts.map((f) => (
+            <div>
+              <dt>{f.k}</dt>
+              <dd>{f.v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ AI ============ -->
+  <RailSection num="06" note="Asked often enough to answer properly." id="ai" ruled>
+    <SectionHeading kicker="The tooling question" title={about.ai.title} lead={about.ai.standfirst} />
+
+    <div class="ai">
+      <div class="ai__col">
+        <p class="label ai__label">{about.ai.machine.label}</p>
+        <ul>
+          {about.ai.machine.items.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <div class="ai__col ai__col--human">
+        <p class="label ai__label">{about.ai.human.label}</p>
+        <ul>
+          {about.ai.human.items.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <p class="ai__line">{about.ai.line}</p>
+    <p class="annot ai__footnote">{about.ai.footnote}</p>
+  </RailSection>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <RailSection
+    num="07"
+    note="Proof, not the whole portfolio."
+    surface="paper-deep"
+    id="experience"
+  >
+    <SectionHeading
+      kicker="Experience"
+      title="Where the practice came from"
+      lead="Short version here. The thinking behind each one is in the case study."
+    />
+    <Timeline />
+  </RailSection>
+
+  <!-- ============ CREDENTIALS ============ -->
+  <RailSection num="08" note="Kept small on purpose." tight>
+    <div class="creds">
+      <div>
+        <p class="label creds__label">Education</p>
+        <ul class="creds__list">
+          {
+            education.map((e) => (
+              <li>
+                <strong>{e.degree}</strong>
+                <span>
+                  {e.school} · {e.years} · {e.detail}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <p class="label creds__label">Certifications</p>
+        <ul class="creds__list creds__list--plain">
+          {certifications.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    </div>
+  </RailSection>
+
+  <CtaBand
+    headline="That is the long version."
+    line="The short version is that I like difficult marketing problems and I am available for them."
+    ctaLabel="Work with me"
+    note={`Based in ${site.location}. Working with people who are not.`}
+  />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--section-y-tight);
+  }
+
+  .page-head__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+    max-width: 16ch;
+  }
+
+  .page-head__lead {
+    margin-top: var(--sp-5);
+    max-width: 58ch;
+  }
+
+  .page-head__actions {
+    margin-top: var(--sp-6);
+  }
+
+  /* ---- Chapters ---- */
+  .chapter {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .chapter__title {
+    font-size: var(--fs-h2);
+    line-height: 1.05;
+  }
+
+  .chapter__body {
+    display: grid;
+    gap: var(--sp-4);
+    max-width: var(--measure);
+    color: var(--fg-soft);
+    font-size: var(--fs-lead);
+    line-height: 1.6;
+  }
+
+  @media (min-width: 62rem) {
+    .chapter {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+      gap: var(--grid-gap);
+      align-items: start;
+    }
+
+    .chapter__title {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--sp-6));
+    }
+  }
+
+  /* ---- Quick facts ---- */
+  .facts {
+    padding-block: var(--sp-9);
+  }
+
+  .facts__grid {
+    display: grid;
+    gap: var(--sp-5);
+    margin: 0;
+  }
+
+  .facts__grid > div {
+    padding-top: var(--sp-3);
+    border-top: var(--line) solid var(--c-rule-ink);
+  }
+
+  .facts__grid dt {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .facts__grid dd {
+    margin: var(--sp-2) 0 0;
+    font-size: var(--fs-small);
+    color: var(--fg);
+  }
+
+  @media (min-width: 48rem) {
+    .facts__grid {
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: var(--sp-5);
+    }
+  }
+
+  /* ---- AI ---- */
+  .ai {
+    display: grid;
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-7);
+  }
+
+  .ai__col {
+    padding-top: var(--sp-4);
+    border-top: var(--line-thick) solid var(--c-rule);
+  }
+
+  .ai__col--human {
+    border-top-color: var(--c-pink);
+  }
+
+  .ai__label {
+    margin-bottom: var(--sp-4);
+  }
+
+  .ai__col--human .ai__label {
+    color: var(--c-pink-deep);
+  }
+
+  .ai ul {
+    display: grid;
+    gap: var(--sp-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--fs-small);
+    color: var(--fg-soft);
+  }
+
+  .ai li {
+    padding-left: var(--sp-4);
+    position: relative;
+  }
+
+  .ai li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 8px;
+    height: var(--line);
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  .ai__col--human li::before {
+    background: var(--c-pink);
+    opacity: 1;
+  }
+
+  .ai__line {
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    max-width: 20ch;
+    padding-top: var(--sp-5);
+    border-top: var(--line-heavy) solid var(--c-ink);
+  }
+
+  .ai__footnote {
+    margin-top: var(--sp-5);
+    max-width: 40ch;
+  }
+
+  @media (min-width: 48rem) {
+    .ai {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--grid-gap);
+    }
+  }
+
+  /* ---- Credentials ---- */
+  .creds {
+    display: grid;
+    gap: var(--sp-7);
+  }
+
+  .creds__label {
+    margin-bottom: var(--sp-4);
+    padding-bottom: var(--sp-3);
+    border-bottom: var(--line) solid var(--rule);
+  }
+
+  .creds__list {
+    display: grid;
+    gap: var(--sp-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .creds__list li {
+    display: grid;
+    gap: 2px;
+    font-size: var(--fs-small);
+  }
+
+  .creds__list span {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.06em;
+    color: var(--fg-mute);
+  }
+
+  .creds__list--plain {
+    gap: var(--sp-2);
+    color: var(--fg-soft);
+  }
+
+  @media (min-width: 48rem) {
+    .creds {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--grid-gap);
+    }
+  }
+</style>

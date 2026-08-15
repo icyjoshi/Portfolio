@@ -1,0 +1,138 @@
+---
+/**
+ * The Lab — short posts, low friction.
+ *
+ * Also surfaces the in-progress projects, because "what I am building"
+ * and "what I have been thinking about" belong on the same page.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import LabCard from '@components/LabCard.astro';
+import CurrentlyInLab from '@components/CurrentlyInLab.astro';
+import EmptyState from '@components/EmptyState.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getLabPosts, uniqueValues } from '@lib/content';
+
+const posts = await getLabPosts();
+const categories = uniqueValues(posts, (p) => p.data.category);
+---
+
+<BaseLayout
+  title="The Lab"
+  description="Short marketing observations, copy experiments, campaign ideas and brand breakdowns from Ayushi Joshi — plus whatever is currently being built."
+>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label label--accent">The Lab</p>
+      <h1 class="page-head__title">Thoughts that did not need a case study</h1>
+      <p class="lead page-head__lead">
+        Brand breakdowns, copy experiments, campaign ideas, things I noticed and
+        could not let go of. Shorter than the work, published more often, and
+        occasionally wrong in public.
+      </p>
+      {
+        categories.length > 0 && (
+          <ul class="page-head__cats">
+            {categories.map((c) => (
+              <li>{c}</li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
+  <RailSection num="01" note="Roughly 300–600 words each." ruled>
+    <SectionHeading title="Posts" />
+
+    {
+      posts.length > 0 ? (
+        <div class="lab-grid">
+          {posts.map((entry) => (
+            <LabCard entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          title="Nothing here yet. I'm working on it."
+          line="Drop a Markdown file into src/content/lab/ and it appears here."
+        />
+      )
+    }
+  </RailSection>
+
+  <RailSection
+    num="02"
+    note="Six projects, various states of half-built."
+    surface="paper-deep"
+  >
+    <SectionHeading
+      kicker="Currently in the lab"
+      title="What I am building"
+      lead="These move into Work when they are finished. Some of them will take a while."
+    />
+    <CurrentlyInLab />
+  </RailSection>
+
+  <CtaBand
+    headline="Want this pointed at your brand?"
+    line="Most of the Lab is me doing unpaid analysis of brands that did not ask. Yours could ask."
+    ctaLabel="Get in touch"
+  />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--sp-8);
+  }
+
+  .page-head__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+    max-width: 17ch;
+  }
+
+  .page-head__lead {
+    margin-top: var(--sp-5);
+    max-width: 54ch;
+  }
+
+  .page-head__cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-4);
+    margin-top: var(--sp-6);
+    padding: 0;
+    list-style: none;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .page-head__cats li + li::before {
+    content: '·';
+    margin-right: var(--sp-4);
+  }
+
+  .lab-grid {
+    display: grid;
+    gap: var(--sp-7) var(--grid-gap);
+  }
+
+  @media (min-width: 40rem) {
+    .lab-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .lab-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

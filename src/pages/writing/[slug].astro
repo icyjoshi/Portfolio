@@ -1,0 +1,113 @@
+---
+/**
+ * A single written piece.
+ *
+ * Only generates pages for pieces that live on this site — anything
+ * with an externalUrl is a link out and never needs a page here.
+ */
+import { render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getWriting, formatLongDate, readingTime } from '@lib/content';
+import { url } from '@lib/url';
+
+export async function getStaticPaths() {
+  const pieces = await getWriting();
+  return pieces
+    .filter((entry) => !entry.data.externalUrl)
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.excerpt}
+  type="article"
+  publishedTime={d.date}
+>
+  <article class="piece">
+    <header class="piece__head">
+      <div class="wrap wrap--text">
+        <nav class="piece__back" aria-label="Breadcrumb">
+          <a class="link" href={url('/writing')}>← Writing</a>
+        </nav>
+
+        <p class="piece__meta">
+          <span class="piece__kind">{d.kind}</span>
+          <time datetime={d.date.toISOString()}>{formatLongDate(d.date)}</time>
+          <span>{readingTime(entry.body)}</span>
+        </p>
+
+        <h1 class="piece__title">{d.title}</h1>
+        <p class="lead piece__excerpt">{d.excerpt}</p>
+      </div>
+    </header>
+
+    <div class="wrap wrap--text">
+      <div class="prose piece__body">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaBand
+    headline="Have a brief?"
+    line="If this is the kind of thinking you want on your marketing rather than on the internet at large, say so."
+    ctaLabel="Work with me"
+  />
+</BaseLayout>
+
+<style>
+  .piece__head {
+    padding-block: clamp(2rem, 5vw, 3.5rem) var(--sp-7);
+  }
+
+  .piece__back {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  .piece__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-3);
+    margin-top: var(--sp-6);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .piece__kind {
+    color: var(--c-pink-deep);
+  }
+
+  .piece__meta > * + *::before {
+    content: '·';
+    margin-right: var(--sp-3);
+  }
+
+  .piece__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+  }
+
+  .piece__excerpt {
+    margin-top: var(--sp-5);
+    max-width: var(--measure-tight);
+  }
+
+  .piece__body {
+    padding-block: var(--sp-7) var(--sp-10);
+    border-top: var(--line-thick) solid var(--c-ink);
+  }
+</style>

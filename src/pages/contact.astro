@@ -1,0 +1,333 @@
+---
+/**
+ * Contact / Work with me.
+ *
+ * No backend, no form service, no database — the brief ruled those
+ * out and they are not needed. The form composes a well-structured
+ * mailto: and hands off to the visitor's mail client. Without JS the
+ * email address is still right there in large type, so the page never
+ * depends on the script working.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import { site } from '@data/site';
+import { url } from '@lib/url';
+
+const socials = site.socials.filter((s) => s.href !== '#');
+
+const briefHelp = [
+  'What you are selling, and to whom',
+  'What is not working right now — or what is about to launch',
+  'What you have already tried',
+  'Rough timeline, and rough budget if you have one',
+  'Anything you already suspect the answer is',
+];
+---
+
+<BaseLayout
+  title="Work with me"
+  description="Get in touch with Ayushi Joshi about freelance marketing work — brand strategy, campaigns, content, research — or a full-time role."
+>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label label--accent">Contact</p>
+      <h1 class="page-head__title">Have a brief? Let's make it interesting.</h1>
+      <p class="lead page-head__lead">
+        Freelance marketing work — brand, campaigns, content, research, audits.
+        Full-time conversations equally welcome. I reply to everything that is
+        not a template.
+      </p>
+
+      <p class="page-head__email">
+        <a class="link" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+
+      <ul class="page-head__where">
+        <li>{site.location}</li>
+        <li>{site.availability}</li>
+        {
+          socials.map((s) => (
+            <li>
+              <a
+                class="link"
+                href={s.href}
+                target={s.href.startsWith('http') ? '_blank' : undefined}
+                rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+        <li><a class="link" href={url(site.resume)}>Résumé (PDF)</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <RailSection num="01" note="Opens your own email app. Nothing is stored here." ruled>
+    <div class="contact">
+      <div class="contact__form-col">
+        <SectionHeading title="Send it over" level={2} />
+
+        <form class="form" data-brief-form>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="company">Company or project</label>
+            <input id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label for="kind">What is this about?</label>
+            <select id="kind" name="kind">
+              <option>Brand or positioning</option>
+              <option>Campaign strategy</option>
+              <option>Content or copy</option>
+              <option>Research or an audit</option>
+              <option>A full-time role</option>
+              <option>Something else entirely</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="brief">The brief</label>
+            <textarea id="brief" name="brief" rows="7" required></textarea>
+            <p class="field__hint">
+              Half-formed is fine. I will ask the annoying questions.
+            </p>
+          </div>
+
+          <button class="form__submit" type="submit">
+            Open this in my email app
+          </button>
+
+          <p class="form__fallback">
+            Rather do it yourself? Write to
+            <a class="link" href={`mailto:${site.email}`}>{site.email}</a>.
+          </p>
+        </form>
+      </div>
+
+      <aside class="contact__aside">
+        <p class="label contact__aside-label">What helps me reply usefully</p>
+        <ol class="contact__help">
+          {briefHelp.map((h) => <li>{h}</li>)}
+        </ol>
+        <p class="annot contact__annot">
+          None of it is compulsory. A single confused paragraph is a perfectly
+          good starting point.
+        </p>
+      </aside>
+    </div>
+  </RailSection>
+</BaseLayout>
+
+<script is:inline define:vars={{ email: site.email }}>
+  /* Compose a mailto: from the form. No network request, no third party. */
+  const form = document.querySelector('[data-brief-form]');
+
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+
+      const name = String(data.get('name') ?? '').trim();
+      const company = String(data.get('company') ?? '').trim();
+      const kind = String(data.get('kind') ?? '').trim();
+      const brief = String(data.get('brief') ?? '').trim();
+
+      const subject = company
+        ? `${kind} — ${company}`
+        : `${kind} — ${name || 'a brief'}`;
+
+      const body = [
+        `From: ${name}`,
+        company ? `Company / project: ${company}` : null,
+        `About: ${kind}`,
+        '',
+        brief,
+      ]
+        .filter((line) => line !== null)
+        .join('\n');
+
+      window.location.href =
+        `mailto:${email}?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+    });
+  }
+</script>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--section-y-tight);
+  }
+
+  .page-head__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+    max-width: 16ch;
+  }
+
+  .page-head__lead {
+    margin-top: var(--sp-5);
+    max-width: 52ch;
+  }
+
+  .page-head__email {
+    margin-top: var(--sp-6);
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    word-break: break-word;
+  }
+
+  .page-head__where {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-4);
+    margin-top: var(--sp-6);
+    padding: 0;
+    list-style: none;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink-mute);
+  }
+
+  .page-head__where li + li::before {
+    content: '·';
+    margin-right: var(--sp-4);
+  }
+
+  /* ---- Layout ---- */
+  .contact {
+    display: grid;
+    gap: var(--sp-8);
+  }
+
+  /* ---- Form ---- */
+  .form {
+    display: grid;
+    gap: var(--sp-5);
+    max-width: 34rem;
+  }
+
+  .field {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .field label {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: var(--sp-3);
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    color: var(--c-ink);
+    background: var(--c-paper);
+    border: var(--line-thick) solid var(--c-ink);
+    border-radius: var(--r-xs);
+  }
+
+  .field textarea {
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: var(--line-thick) solid var(--c-pink-deep);
+    outline-offset: 2px;
+  }
+
+  .field__hint {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    color: var(--c-ink-mute);
+  }
+
+  .form__submit {
+    justify-self: start;
+    padding: 1rem 2rem;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+    background: var(--c-yellow);
+    border: var(--line-thick) solid var(--c-ink);
+    border-radius: var(--r-xs);
+    box-shadow: 3px 3px 0 var(--c-ink);
+    transition:
+      transform var(--t-fast) var(--ease),
+      box-shadow var(--t-fast) var(--ease);
+  }
+
+  .form__submit:hover,
+  .form__submit:focus-visible {
+    transform: translate(calc(-2px * var(--motion)), calc(-2px * var(--motion)));
+    box-shadow: 5px 5px 0 var(--c-ink);
+  }
+
+  .form__fallback {
+    font-size: var(--fs-small);
+    color: var(--c-ink-soft);
+  }
+
+  /* ---- Aside ---- */
+  .contact__aside {
+    align-self: start;
+    padding-top: var(--sp-4);
+    border-top: var(--line-thick) solid var(--c-ink);
+  }
+
+  .contact__aside-label {
+    margin-bottom: var(--sp-4);
+  }
+
+  .contact__help {
+    display: grid;
+    gap: var(--sp-3);
+    margin: 0;
+    padding-left: var(--sp-5);
+    font-size: var(--fs-small);
+    color: var(--c-ink-soft);
+  }
+
+  .contact__help li::marker {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-micro);
+    color: var(--c-pink-deep);
+  }
+
+  .contact__annot {
+    margin-top: var(--sp-5);
+  }
+
+  @media (min-width: 56rem) {
+    .contact {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: var(--sp-9);
+    }
+  }
+</style>

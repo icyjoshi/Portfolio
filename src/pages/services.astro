@@ -1,0 +1,278 @@
+---
+/**
+ * Services.
+ *
+ * Ordered by what Ayushi most wants to be hired for, and every service
+ * carries proof links. The "developing" tier renders differently on
+ * purpose — it is the honest one, and it should look deliberate rather
+ * than buried.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import CtaBand from '@components/CtaBand.astro';
+import Button from '@components/Button.astro';
+import { serviceTiers, idealClients, howItWorks } from '@data/services';
+import { url } from '@lib/url';
+---
+
+<BaseLayout
+  title="Services"
+  description="Freelance marketing services from Ayushi Joshi — brand strategy, campaign strategy, creative strategy, SEO content, landing page copy, research and audits. Every service linked to proof."
+>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label label--accent">Services</p>
+      <h1 class="page-head__title">What you can actually hire me for</h1>
+      <p class="lead page-head__lead">
+        Listed in the order I most want to do them, which is more useful to you
+        than an alphabetical menu. Everything here links to work where I have
+        done it before — and where I have not, it says so.
+      </p>
+      <div class="page-head__actions">
+        <Button href="/contact" variant="solid">Send me a brief</Button>
+      </div>
+    </div>
+  </section>
+
+  {
+    serviceTiers.map((tier, i) => (
+      <RailSection
+        num={String(i + 1).padStart(2, '0')}
+        note={tier.eyebrow}
+        id={tier.id}
+        surface={tier.developing ? 'ink' : i % 2 === 1 ? 'paper-deep' : 'paper'}
+      >
+        <SectionHeading title={tier.title} lead={tier.note} />
+
+        <div class="svc__list">
+          {tier.services.map((s) => (
+            <article class="svc" data-reveal data-reveal-group="svc">
+              <h3 class="svc__name">{s.name}</h3>
+              <p class="svc__line">{s.line}</p>
+
+              <div class="svc__cols">
+                <div>
+                  <p class="label svc__sub">What you get</p>
+                  <ul class="svc__deliverables">
+                    {s.deliverables.map((d) => (
+                      <li>{d}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {s.proof.length > 0 && (
+                  <div>
+                    <p class="label svc__sub">Where I have done it</p>
+                    <ul class="svc__proof">
+                      {s.proof.map((p) => (
+                        <li>
+                          <a class="link" href={url(p.href)}>
+                            {p.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </RailSection>
+    ))
+  }
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <RailSection num="06" note="No discovery call theatre." ruled>
+    <SectionHeading
+      kicker="How it works"
+      title="Four steps, no mystery"
+    />
+    <ol class="how">
+      {
+        howItWorks.map((h) => (
+          <li class="how__step" data-reveal data-reveal-group="how">
+            <span class="how__num">{h.num}</span>
+            <h3 class="how__title">{h.title}</h3>
+            <p class="how__line">{h.line}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </RailSection>
+
+  <!-- ============ WHO ============ -->
+  <RailSection num="07" note="Product and brand side, mainly." surface="paper-deep">
+    <SectionHeading
+      kicker="Who this is for"
+      title="The briefs I want"
+      lead="I am aiming at brand and product-side work rather than personal-brand content packages. If you have a real product and a real marketing problem, we will get on."
+    />
+    <ul class="who">
+      {idealClients.map((c) => <li>{c}</li>)}
+    </ul>
+  </RailSection>
+
+  <CtaBand
+    headline="Have a brief? Send it my way."
+    line="Including the ones that are three bullet points and a vague feeling that something is not working."
+    note="I reply properly. Not with a calendar link and no context."
+  />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--section-y-tight);
+  }
+
+  .page-head__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+    max-width: 16ch;
+  }
+
+  .page-head__lead {
+    margin-top: var(--sp-5);
+    max-width: 54ch;
+  }
+
+  .page-head__actions {
+    margin-top: var(--sp-6);
+  }
+
+  /* ---- Services ---- */
+  .svc__list {
+    display: grid;
+    border-top: var(--line-thick) solid var(--fg);
+  }
+
+  .svc {
+    padding-block: var(--sp-6);
+    border-bottom: var(--line) solid var(--rule);
+  }
+
+  .svc__name {
+    font-size: var(--fs-h3);
+    line-height: 1.15;
+  }
+
+  .svc__line {
+    margin-top: var(--sp-3);
+    color: var(--fg-soft);
+    max-width: 56ch;
+  }
+
+  .svc__cols {
+    display: grid;
+    gap: var(--sp-5);
+    margin-top: var(--sp-5);
+  }
+
+  .svc__sub {
+    margin-bottom: var(--sp-3);
+  }
+
+  .svc__deliverables,
+  .svc__proof {
+    display: grid;
+    gap: var(--sp-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--fs-small);
+    color: var(--fg-soft);
+  }
+
+  .svc__deliverables li {
+    padding-left: var(--sp-4);
+    position: relative;
+  }
+
+  .svc__deliverables li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 8px;
+    height: var(--line);
+    background: var(--accent-loud);
+  }
+
+  @media (min-width: 48rem) {
+    .svc__cols {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: var(--grid-gap);
+    }
+  }
+
+  /* ---- How it works ---- */
+  .how {
+    display: grid;
+    gap: var(--sp-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .how__step {
+    padding-top: var(--sp-4);
+    border-top: var(--line-thick) solid var(--c-ink);
+  }
+
+  .how__num {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .how__title {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-h4);
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-weight: 500;
+  }
+
+  .how__line {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-small);
+    color: var(--fg-soft);
+  }
+
+  @media (min-width: 48rem) {
+    .how {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--sp-7) var(--grid-gap);
+    }
+  }
+
+  @media (min-width: 68rem) {
+    .how {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /* ---- Who ---- */
+  .who {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--line) solid var(--rule);
+  }
+
+  .who li {
+    padding-block: var(--sp-4);
+    border-bottom: var(--line) solid var(--rule);
+    font-family: var(--ff-display);
+    font-variation-settings: var(--wonk-on);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+</style>

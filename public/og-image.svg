@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F7F1E7"/>
+
+  <!-- ruled paper -->
+  <g stroke="#17152B" stroke-opacity="0.07" stroke-width="1">
+    <line x1="0" y1="14" x2="1200" y2="14"/><line x1="0" y1="43" x2="1200" y2="43"/><line x1="0" y1="72" x2="1200" y2="72"/><line x1="0" y1="101" x2="1200" y2="101"/><line x1="0" y1="130" x2="1200" y2="130"/><line x1="0" y1="159" x2="1200" y2="159"/><line x1="0" y1="188" x2="1200" y2="188"/><line x1="0" y1="217" x2="1200" y2="217"/><line x1="0" y1="246" x2="1200" y2="246"/><line x1="0" y1="275" x2="1200" y2="275"/><line x1="0" y1="304" x2="1200" y2="304"/><line x1="0" y1="333" x2="1200" y2="333"/><line x1="0" y1="362" x2="1200" y2="362"/><line x1="0" y1="391" x2="1200" y2="391"/><line x1="0" y1="420" x2="1200" y2="420"/><line x1="0" y1="449" x2="1200" y2="449"/><line x1="0" y1="478" x2="1200" y2="478"/><line x1="0" y1="507" x2="1200" y2="507"/><line x1="0" y1="536" x2="1200" y2="536"/><line x1="0" y1="565" x2="1200" y2="565"/><line x1="0" y1="594" x2="1200" y2="594"/><line x1="0" y1="623" x2="1200" y2="623"/>
+  </g>
+
+  <!-- top rule + eyebrow -->
+  <rect x="72" y="64" width="1056" height="3" fill="#17152B"/>
+  <text x="72" y="106" font-family="'Courier New', monospace" font-size="21" letter-spacing="5" fill="#F04A8A">AYUSHI JOSHI</text>
+  <text x="1128" y="106" font-family="'Courier New', monospace" font-size="21" letter-spacing="5" fill="#17152B" fill-opacity="0.55" text-anchor="end">MARKETING PORTFOLIO</text>
+
+  <!-- headline. Sizes are tuned so the longest line clears the 1128
+       right margin in Georgia — check the PNG if you edit the words. -->
+  <text x="72" y="268" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="700" fill="#17152B">I notice things.</text>
+  <text x="72" y="366" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700" fill="#17152B" fill-opacity="0.55">Then I make something</text>
+  <text x="72" y="452" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700" fill="#17152B" fill-opacity="0.55">out of them.</text>
+
+  <!-- highlighter under "notice": sits on the baseline, not through it -->
+  <rect x="126" y="250" width="214" height="18" fill="#F04A8A" fill-opacity="0.34"/>
+
+  <!-- bottom rule + capability chain -->
+  <rect x="72" y="530" width="1056" height="3" fill="#17152B"/>
+  <text x="72" y="572" font-family="'Courier New', monospace" font-size="20" letter-spacing="3" fill="#17152B" fill-opacity="0.7">BRAND &#183; CAMPAIGNS &#183; CONTENT &#183; GROWTH &#183; AI</text>
+
+  <rect x="1040" y="546" width="88" height="10" fill="#F6C945"/>
+</svg>

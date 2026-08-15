@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ayushi Joshi">
+  <rect width="64" height="64" fill="#17152B"/>
+  <!-- A, drawn as strokes so it renders identically without a font -->
+  <path d="M13 51 L32 13 L51 51" fill="none" stroke="#F7F1E7" stroke-width="7.5" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M22 40 L42 40" fill="none" stroke="#F7F1E7" stroke-width="7.5" stroke-linecap="square"/>
+  <!-- the noticed thing -->
+  <circle cx="53" cy="12" r="6.5" fill="#F04A8A"/>
+</svg>

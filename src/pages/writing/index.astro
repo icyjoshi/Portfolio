@@ -1,0 +1,77 @@
+---
+/**
+ * Writing — set as an editorial index rather than a blog listing.
+ * Pieces published elsewhere link out; pieces written for this site
+ * get their own page.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import RailSection from '@components/RailSection.astro';
+import WritingCard from '@components/WritingCard.astro';
+import EmptyState from '@components/EmptyState.astro';
+import CtaBand from '@components/CtaBand.astro';
+import { getWriting } from '@lib/content';
+
+const pieces = await getWriting();
+---
+
+<BaseLayout
+  title="Writing"
+  description="Essays and articles on marketing, brand and strategy by Ayushi Joshi."
+>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label label--accent">Writing</p>
+      <h1 class="page-head__title">Longer thoughts, fewer of them</h1>
+      <p class="lead page-head__lead">
+        Essays and articles about marketing — mostly about the gap between what
+        the industry says it does and what actually seems to work.
+      </p>
+    </div>
+  </section>
+
+  <RailSection num="01" note="Published here and elsewhere." ruled>
+    {
+      pieces.length > 0 ? (
+        <div class="writing-list">
+          {pieces.map((entry) => (
+            <WritingCard entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          title="Nothing published here yet."
+          line="Add a Markdown file to src/content/writing/ — or point it at something published elsewhere with the externalUrl field."
+        />
+      )
+    }
+  </RailSection>
+
+  <CtaBand
+    headline="Need someone who can write and think?"
+    line="Those are meant to be the same job. They are surprisingly often not."
+    ctaLabel="Work with me"
+  />
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--sp-8);
+  }
+
+  .page-head__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--ls-display);
+    max-width: 15ch;
+  }
+
+  .page-head__lead {
+    margin-top: var(--sp-5);
+    max-width: 54ch;
+  }
+
+  .writing-list {
+    border-top: var(--line-thick) solid var(--fg);
+  }
+</style>
