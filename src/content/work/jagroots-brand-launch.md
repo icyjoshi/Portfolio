@@ -46,9 +46,6 @@ not defined in any usable way, and the category — apps that connect you
 to people physically near you — does not have the kind of shorthand that
 lets a one-line ad do the work for you.
 
-Alongside it, a second job: multi-client content planning, and a website
-whose structure and content architecture needed rebuilding.
-
 ## 02 — The context
 
 A new consumer app has a specific and unforgiving problem. It is not that
