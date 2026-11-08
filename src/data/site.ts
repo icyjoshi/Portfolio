@@ -31,16 +31,16 @@ export const site = {
   availability: 'Open to freelance briefs and full-time roles',
 
   socials: [
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/-ayushi-joshi/', note: '[ADD] your LinkedIn URL' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ayushijoshi6', note: '' },
     { label: 'Upwork', href: '#', note: '[ADD] your Upwork URL' },
-    { label: 'Email', href: 'mailto:joshiaayu06@gmail.com', note: '' },
+    { label: 'Email', href: 'mailto:ayushijoshi.e@gmail.com', note: '' },
   ],
 
   /* Drop the PDF at public/ayushi-joshi-resume.pdf and this works. */
   resume: '/ayushi-joshi-resume.pdf',
 
   /* Shown in the footer. Update when you make a meaningful change. */
-  lastUpdated: 'August 2026',
+  lastUpdated: 'November 2026',
 
   /* ---------- Open Graph ---------- */
   ogImage: '/og-image.png',

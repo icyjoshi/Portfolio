@@ -28,12 +28,12 @@ metrics:
     label: views on launch content
     context: Compared with the brand’s previous content
   - value: '3×'
-    label: website traffic
-    context: After the relaunch of site structure and SEO
+    label: website traffic, SEMrush
+    context: The ten days after relaunch — the full window before the internship ended. I restructured the content architecture and built the blog and FAQ topic banks.
 tldr:
   problem: A location-based social app had to launch to an audience that did not yet know the category existed.
   approach: Research first — market, competitors, pricing, distribution, packaging — then a content direction built around showing the product in use rather than explaining it.
-  impact: Launch content reached 2× the views of previous content; a parallel site relaunch tripled traffic.
+  impact: Launch content reached 2× the views of previous content; traffic tripled in the ten days after the parallel site relaunch.
 links: []
 draft: false
 ---
@@ -125,7 +125,8 @@ decided what we could credibly promise at launch.
 The launch content reached **2× the views** of the brand's previous
 content.
 
-The website relaunch, run in parallel, produced **3× the traffic** it had
+The website relaunch, run in parallel, produced **3× the traffic** in the
+ten days afterwards — the full window before the internship ended — that it had
 before — that one is more attributable, because restructuring
 information architecture and fixing search visibility has a fairly direct
 line to sessions.

@@ -20,8 +20,9 @@ accent: yellow
 summary: >
   A 378K+ member Facebook community of MBA aspirants — anxious, competitive,
   online at 1 AM, and asking the same questions in forty different ways. With
-  a team of five we handled 18,000+ user queries and converted 91 of 117 into
-  leads. The interesting part was never the volume. It was what the questions
+  a team of five we handled 18,000+ user queries. Separately, I ran a
+  consultative sales track and converted 91 of 117 prospects into course
+  sales. The interesting part was never the volume. It was what the questions
   told us.
 metrics:
   - value: '378K+'
@@ -29,14 +30,14 @@ metrics:
     context: Facebook community managed
   - value: '18,000+'
     label: user queries handled
-    context: With a team of 5 interns
-  - value: '78%'
-    label: lead conversion
-    context: 91 of 117 user queries converted
+    context: Community support, alongside a team of 5 interns
+  - value: '91 of 117'
+    label: prospects converted to course sales
+    context: A separate consultative sales track, not the support queries
 tldr:
   problem: An enormous community generating enormous volumes of questions, most of them treated as support tickets rather than as signal.
   approach: Read the queries as audience research, build interactive content around what they actually revealed, and handle the qualified ones properly.
-  impact: 18,000+ queries handled across a team of 5; 78% conversion on qualified queries — 91 of 117.
+  impact: 18,000+ support queries handled across a team of 5; separately, 91 of 117 prospects converted to course sales.
 links: []
 draft: false
 ---
@@ -114,10 +115,10 @@ underneath it.
 
 **18,000+ user queries handled** across the team.
 
-**78% lead conversion — 91 of 117 user queries.** That is the number I am
-most attached to, precisely because it is small. It is a qualified set,
-not a vanity total, and the ratio holds up because the qualification
-happened before the count.
+**91 of 117 prospects converted into course sales.** That is a separate
+track from the support queries above — a smaller set of consultative
+conversations, counted individually. It is the number I am most attached
+to, precisely because it is small enough to show the denominator.
 
 ## 08 — What I learned
 
@@ -126,6 +127,6 @@ job. I have never had a cleaner view of what an audience is actually
 worried about than I had reading those queries, and no survey would have
 produced it.
 
-Also: a 78% conversion rate on 117 queries is a more honest thing to put
-on a portfolio than a bigger percentage on a vaguer denominator. I would
-rather show the denominator.
+Also: 91 out of 117 is a more honest thing to put on a portfolio than
+the same ratio written as a percentage. A percentage invites the question
+"out of what?" — the raw pair answers it before anyone has to ask.

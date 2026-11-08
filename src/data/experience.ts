@@ -92,7 +92,7 @@ export const experience: Role[] = [
     highlights: [
       '378K+ member community managed',
       '18,000+ user queries handled with a team of 5 interns',
-      '78% lead conversion — 91 of 117 user queries',
+      '91 of 117 prospects converted to course sales, on a separate consultative track',
       'Interactive content and audience analysis for an MBA-aspirant audience',
     ],
     caseStudy: 'iquanta-community',

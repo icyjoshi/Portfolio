@@ -26,8 +26,8 @@ summary: >
   Weekly active users grew 400% over the period.
 metrics:
   - value: '400%'
-    label: weekly active user growth
-    context: Over the period, across content and campaign work
+    label: weekly active users, Cogent University
+    context: Measured in Google Analytics over the eight-month engagement. A team number I contributed to, not a single campaign's.
   - value: '3'
     label: editorial campaign moments
     context: Women’s Day, Black History Month, Mental Health Month

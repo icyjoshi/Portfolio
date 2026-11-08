@@ -26,15 +26,15 @@ export const proofStrip = [
     href: '/work/cogent-content-engine',
   },
   {
-    value: '78%',
-    label: 'lead conversion',
-    context: '91 of 117 user queries converted, iQuanta',
+    value: '91 of 117',
+    label: 'prospects converted to course sales',
+    context: 'Consultative sales track at iQuanta',
     href: '/work/iquanta-community',
   },
   {
     value: '3×',
     label: 'website traffic',
-    context: 'After the site relaunch at Jagroots',
+    context: 'The ten days after the Jagroots site relaunch',
     href: '/work/jagroots-brand-launch',
   },
 ] as const;
